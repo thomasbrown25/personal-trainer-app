@@ -22,10 +22,9 @@ jobs:
       - name: Azure login
         uses: azure/login@v2
         with:
-          auth-type: IDENTITY
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4B70EC45B5E5410FA05378FEBE8C79D0 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1297720F46A5429382313AFF15A25853 }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_7E0E3908B28346D9B03E864E1E0CF954 }}
-          enable-AzPSSession: true
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
