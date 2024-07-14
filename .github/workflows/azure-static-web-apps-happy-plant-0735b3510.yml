@@ -39,6 +39,12 @@ jobs:
           output_location: "build" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
 
+      - name: Login to Azure
+        uses: azure/login@v2
+        with:
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_4B70EC45B5E5410FA05378FEBE8C79D0 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1297720F46A5429382313AFF15A25853 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_7E0E3908B28346D9B03E864E1E0CF954 }}
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
