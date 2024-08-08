@@ -1,18 +1,19 @@
 // prop-types is a library for typechecking of props
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 // @mui material components
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Grid";
 
 // components
-import MDBox from 'components/MDBox';
-import DefaultNavbar from 'components/DefaultNavbar';
-import PageLayout from 'layouts/page-layout';
+import MDBox from "components/MDBox";
+import DefaultNavbar from "components/DefaultNavbar";
+import PageLayout from "layouts/page-layout";
+import Footer from "layouts/footer";
 
 function CoverLayout({ coverHeight, image, children }) {
   return (
     <PageLayout>
-      <DefaultNavbar routes={null} action={false} transparent light />
+      {/* <DefaultNavbar routes={null} action={false} transparent light /> */}
       <MDBox
         width="calc(100% - 2rem)"
         minHeight={coverHeight}
@@ -21,20 +22,20 @@ function CoverLayout({ coverHeight, image, children }) {
         my={2}
         pt={6}
         pb={28}
-        sx={{
-          backgroundImage: ({
-            functions: { linearGradient, rgba },
-            palette: { gradients }
-          }) =>
-            image &&
-            `${linearGradient(
-              rgba(gradients.dark.main, 0.4),
-              rgba(gradients.dark.state, 0.4)
-            )}, url(${image})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
+        // sx={{
+        //   backgroundImage: ({
+        //     functions: { linearGradient, rgba },
+        //     palette: { gradients }
+        //   }) =>
+        //     image &&
+        //     `${linearGradient(
+        //       rgba(gradients.dark.main, 0.4),
+        //       rgba(gradients.dark.state, 0.4)
+        //     )}, url(${image})`,
+        //   backgroundSize: 'cover',
+        //   backgroundPosition: 'center',
+        //   backgroundRepeat: 'no-repeat'
+        // }}
       />
       <MDBox
         mt={{ xs: -20, lg: -18 }}
@@ -49,13 +50,14 @@ function CoverLayout({ coverHeight, image, children }) {
         </Grid>
       </MDBox>
       {/* <Footer /> */}
+      <Footer />
     </PageLayout>
   );
 }
 
 // Setting default props for the CoverLayout
 CoverLayout.defaultProps = {
-  coverHeight: '35vh'
+  coverHeight: "35vh"
 };
 
 // Typechecking props for the CoverLayout

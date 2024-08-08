@@ -17,27 +17,25 @@ function Footer({ light }) {
   const { size } = typography;
 
   return (
-    <MDBox position="relative" width="97%" mt={10} bottom={0} py={4}>
-      <Container>
+    <MDBox position="relative" width="100%" mt={10} bottom={0} py={4}>
+      <MDBox
+        width="100%"
+        display="flex"
+        flexDirection={{ xs: "column", lg: "row" }}
+        justifyContent="center"
+        alignItems="center"
+      >
         <MDBox
-          width="100%"
           display="flex"
-          flexDirection={{ xs: "column", lg: "row" }}
-          justifyContent="space-between"
+          justifyContent="center"
           alignItems="center"
-          px={1.5}
+          flexWrap="wrap"
+          color={light ? "white" : "text"}
+          fontSize={size.sm}
         >
-          <MDBox
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            flexWrap="wrap"
-            color={light ? "white" : "text"}
-            fontSize={size.sm}
-          >
-            &copy; {new Date().getFullYear()}, Created by Thomas Brown
-          </MDBox>
-          <MDBox
+          &copy; {new Date().getFullYear()}, Created by Thomas Brown
+        </MDBox>
+        {/* <MDBox
             component="ul"
             sx={({ breakpoints }) => ({
               display: "flex",
@@ -54,20 +52,19 @@ function Footer({ light }) {
               }
             })}
           >
-            {/* <MDBox component="li" pr={2} lineHeight={1}>
+            <MDBox component="li" pr={2} lineHeight={1}>
               <Link href="https://thomasbrownportfolio.com/" target="_blank">
                 <MDTypography
                   variant="button"
                   fontWeight="regular"
-                  color={light ? 'white' : 'dark'}
+                  color={light ? "white" : "dark"}
                 >
                   Thomas' Portfolio
                 </MDTypography>
               </Link>
-            </MDBox> */}
-          </MDBox>
-        </MDBox>
-      </Container>
+            </MDBox>
+          </MDBox> */}
+      </MDBox>
     </MDBox>
   );
 }

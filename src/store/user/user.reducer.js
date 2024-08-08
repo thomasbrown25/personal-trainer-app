@@ -1,12 +1,12 @@
-import { USER_ACTION_TYPES } from './user.types';
+import { USER_ACTION_TYPES } from "./user.types";
 
 const initialState = {
-  currentUser: { linkToken: null, accessToken: null, publicToken: null },
-  settings: { darkMode: true, sidebarMini: false, activeColor: 'blue' },
+  currentUser: {},
+  settings: { darkMode: true, sidebarMini: false, activeColor: "blue" },
   isLinkValid: true,
   isAuthenticated: null,
   loading: true,
-  token: localStorage.getItem('token'),
+  token: localStorage.getItem("token"),
   error: null
 };
 
@@ -20,12 +20,12 @@ function userReducer(state = initialState, action) {
         isAuthenticated: true,
         loading: false,
         currentUser: {
+          ...state.currentUser,
           id: payload.id,
           firstname: payload.firstname,
           lastname: payload.lastname,
           email: payload.email,
-          ...state.currentUser,
-          accessToken: payload.accessToken
+          role: payload.role
         },
         error: null
       };
@@ -102,50 +102,6 @@ function userReducer(state = initialState, action) {
       return {
         ...state,
         settings: { ...state.settings, activeColor: payload }
-      };
-
-    case USER_ACTION_TYPES.CREATE_LINK_TOKEN_SUCCESS:
-      return {
-        ...state,
-        currentUser: { ...state.currentUser, linkToken: payload },
-        error: null
-      };
-
-    case USER_ACTION_TYPES.CREATE_LINK_TOKEN_FAILED:
-      return {
-        ...state,
-        loading: false,
-        error: payload
-      };
-
-    case USER_ACTION_TYPES.PUBLIC_TOKEN_EXCHANGE_SUCCESS:
-      return {
-        ...state,
-        currentUser: { ...state.currentUser, accessToken: payload },
-        isLinkValid: true,
-        error: null
-      };
-
-    case USER_ACTION_TYPES.PUBLIC_TOKEN_EXCHANGE_FAILED:
-      return {
-        ...state,
-        error: payload
-      };
-
-    case USER_ACTION_TYPES.ITEM_LOGIN_REQUIRED:
-    case USER_ACTION_TYPES.UPDATE_LINK_TOKEN_FAILED:
-      return {
-        ...state,
-        isLinkValid: false,
-        error: payload
-      };
-
-    case USER_ACTION_TYPES.UPDATE_LINK_TOKEN_SUCCESS:
-      return {
-        ...state,
-        isLinkValid: true,
-        currentUser: { ...state.currentUser, linkToken: payload.data },
-        error: null
       };
 
     case USER_ACTION_TYPES.RESET_STATE:

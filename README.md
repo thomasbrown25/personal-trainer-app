@@ -1,10 +1,10 @@
-# [Financing App](https://financing-app.azurewebsites.net/login)
+# [Personal Trainer](https://personal-trainer-app.azurewebsites.net/login)
 
 ![version](https://img.shields.io/badge/version-2.1.0-blue.svg)
 
 ![Image](./src/assets/images/dashboard-image.jpg)
 
-Financing App is a personal finance app that helps you budget and track finance needs. This app is currently in demo mode. It's also hosted on Azure App Services, with a repo in Azure Devops and GitHub.
+Personal Trainer is a personal finance app that helps you budget and track finance needs. This app is currently in demo mode. It's also hosted on Azure App Services, with a repo in Azure Devops and GitHub.
 
 ## Small list of some of the 3rd party React Components used
 
@@ -44,7 +44,7 @@ Financing App is a personal finance app that helps you budget and track finance 
 Within the download you'll find the following directories and files:
 
 ```
-financing-app
+personal-trainer-app
     ├── public
     │   ├── apple-icon.png
     │   ├── favicon.png

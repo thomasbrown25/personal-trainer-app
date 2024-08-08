@@ -11,9 +11,9 @@ import MDBox from "components/MDBox";
 // Material Dashboard 2 PRO React context
 import { useMaterialUIController, setLayout } from "context";
 import HeaderImage from "components/HeaderImage/header-image.component";
-import DashboardNavbar from "components/Navbar/DashboardNavbar";
+import DashboardNavbar from "layouts/dashboard-navbar";
 
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, pageTitle }) => {
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav } = controller;
   const { pathname } = useLocation();
@@ -38,8 +38,7 @@ const MainLayout = ({ children }) => {
         }
       })}
     >
-      <DashboardNavbar />
-      <HeaderImage />
+      <DashboardNavbar pageTitle={pageTitle} />
       {children}
     </MDBox>
   );

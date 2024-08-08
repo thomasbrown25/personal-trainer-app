@@ -609,7 +609,7 @@ function DefaultNavbar({ routes, brand, transparent, light, action }) {
 
 // Declaring default props for DefaultNavbar
 DefaultNavbar.defaultProps = {
-  brand: "Financing App",
+  brand: "Personal Trainer",
   transparent: false,
   light: false,
   action: false

@@ -1,8 +1,6 @@
-import { TRANSACTIONS_ACTION_TYPES } from "store/transactions/transactions.types";
 import { api } from "../../utils/api.utils";
 
 import { USER_ACTION_TYPES } from "./user.types";
-import { ACCOUNTS_ACTION_TYPES } from "store/accounts/accounts.types";
 
 /** Calls the API service to register a user and returns a jwt token
  ** POST: "/user/register"
@@ -128,9 +126,7 @@ export const logout = () => async (dispatch) => {
       type: USER_ACTION_TYPES.SIGN_OUT_SUCCESS
     });
 
-    dispatch({ type: TRANSACTIONS_ACTION_TYPES.RESET_STATE });
     dispatch({ type: USER_ACTION_TYPES.RESET_STATE });
-    dispatch({ type: ACCOUNTS_ACTION_TYPES.RESET_STATE });
   } catch (error) {
     console.log(error, error.message);
     dispatch({
@@ -201,90 +197,7 @@ export const saveSettings = (newSettings) => async (dispatch) => {
   }
 };
 
-/** Calls financing-api to save sidebar color
+/** Calls personal-trainer-api to save sidebar color
  ** POST: "/api/user/settings
  * @param color: string
  **/
-
-export const setSidebarColor = (color) => async (dispatch) => {
-  try {
-    // add functionality to save user settings to DB
-    // const response = await api.post('/api/user/settings', settings);
-
-    dispatch({
-      type: USER_ACTION_TYPES.SET_SIDEBAR_COLOR_SUCCESS,
-      payload: color
-    });
-  } catch (error) {
-    console.log(error, error.message);
-    dispatch({
-      type: USER_ACTION_TYPES.SET_SIDEBAR_COLOR_FAILED,
-      payload: error
-    });
-  }
-};
-
-/******Plaid Actions ********/
-
-export const createLinkToken = () => async (dispatch) => {
-  try {
-    const response = await api.get("/api/plaid/create-link-token");
-
-    dispatch({
-      type: USER_ACTION_TYPES.CREATE_LINK_TOKEN_SUCCESS,
-      payload: response.data.data
-    });
-  } catch (error) {
-    console.log(error, error.message);
-    dispatch({
-      type: USER_ACTION_TYPES.CREATE_LINK_TOKEN_FAILED,
-      payload: error
-    });
-  }
-};
-
-/** Calls financing-api which calls Plaid api "/public_token/exchange" and exhanges
- *  the publicToken for the accessToken
- ** POST: "/api/plaid/public-token-exchange"
- * @param publicToken: string: publicToken
- **/
-export const publicTokenExchange = (publicToken) => async (dispatch) => {
-  try {
-    const response = await api.post(
-      "/api/plaid/public-token-exchange",
-      `"${publicToken}"`
-    );
-
-    dispatch({
-      type: USER_ACTION_TYPES.PUBLIC_TOKEN_EXCHANGE_SUCCESS,
-      payload: response.data.data
-    });
-  } catch (error) {
-    console.log(error, error.message);
-    dispatch({
-      type: USER_ACTION_TYPES.PUBLIC_TOKEN_EXCHANGE_FAILED,
-      payload: error
-    });
-  }
-};
-
-/** Calls financing-api which calls Plaid api "/api/plaid/update-link-token"
- ** POST: "/api/plaid/update-link-token"
- * @param null: null
- **/
-export const updateLinkToken = () => async (dispatch) => {
-  try {
-    const response = await api.post("/api/plaid/update-link-token");
-
-    dispatch({
-      type: USER_ACTION_TYPES.UPDATE_LINK_TOKEN_SUCCESS,
-      payload: response.data
-    });
-  } catch (error) {
-    console.log(error, error.message);
-    dispatch({
-      type: USER_ACTION_TYPES.UPDATE_LINK_TOKEN_FAILED,
-      payload: error
-    });
-  }
-};

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 
 // react-router-dom components
@@ -27,23 +27,24 @@ import MDInput from "components/MDInput";
 import MDButton from "components/MDButton";
 
 // Authentication layout components
-import BasicLayout from "layouts/auth-layout/basic.layout";
+import CoverLayout from "layouts/auth-layout/cover.layout";
 
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+
+import { selectUserRole } from "store/user/user.selector";
 
 const defaultFormData = {
   email: "",
   password: ""
 };
 
-const LoginRoute = ({
+const LoginPage = ({
   login,
   clearLoginError,
   user: { isAuthenticated, error }
 }) => {
-  const [rememberMe, setRememberMe] = useState(false);
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const userRole = useSelector(selectUserRole);
 
   const [loginError, setLoginError] = useState("");
   const handleLoginError = () => {
@@ -55,8 +56,16 @@ const LoginRoute = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    isAuthenticated && navigate("/dashboard");
-  });
+    if (isAuthenticated) {
+      if (userRole === "Admin") {
+        navigate("/admin-portal");
+      } else if (userRole === "Trainer") {
+        navigate("/trainer-portal");
+      } else if (userRole === "Client") {
+        navigate("/client-portal");
+      }
+    }
+  }, [isAuthenticated, navigate, userRole]);
 
   useEffect(() => {
     if (error) {
@@ -89,7 +98,6 @@ const LoginRoute = ({
           break;
 
         default:
-          console.log("we got here");
           setLoginError(
             "Sorry we ran into an issue. Please contact support for assistance."
           );
@@ -98,61 +106,13 @@ const LoginRoute = ({
   };
 
   return (
-    <BasicLayout image={bgImage}>
+    <CoverLayout image={bgImage}>
+      <MDBox mx={2} mt={-3} p={2} mb={1} textAlign="center">
+        <MDTypography variant="h4" fontWeight="light" color="white" mt={1}>
+          Sign in to Personal Trainer
+        </MDTypography>
+      </MDBox>
       <Card>
-        <MDBox
-          variant="gradient"
-          bgColor="info"
-          borderRadius="lg"
-          coloredShadow="info"
-          mx={2}
-          mt={-3}
-          p={2}
-          mb={1}
-          textAlign="center"
-        >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Sign in
-          </MDTypography>
-          <Grid
-            container
-            spacing={3}
-            justifyContent="center"
-            sx={{ mt: 1, mb: 2 }}
-          >
-            <Grid item xs={2}>
-              <MDTypography
-                component={MuiLink}
-                href="#"
-                variant="body1"
-                color="white"
-              >
-                <FacebookIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-            <Grid item xs={2}>
-              <MDTypography
-                component={MuiLink}
-                href="#"
-                variant="body1"
-                color="white"
-              >
-                <GitHubIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-            <Grid item xs={2}>
-              <MDTypography
-                component={MuiLink}
-                href="#"
-                variant="body1"
-                color="white"
-              >
-                <GoogleIcon color="inherit" />
-              </MDTypography>
-            </Grid>
-          </Grid>
-        </MDBox>
-
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form" onSubmit={onSubmit}>
             <MDBox mb={2}>
@@ -185,32 +145,26 @@ const LoginRoute = ({
               </MDBox>
             </Collapse>
 
-            <MDBox display="flex" alignItems="center" ml={-1}>
-              <Switch checked={rememberMe} onChange={handleSetRememberMe} />
+            <MDBox display="flex" justifyContent="right" py={1}>
               <MDTypography
+                component={Link}
+                to="/password-reset"
                 variant="button"
-                fontWeight="regular"
-                color="text"
-                onClick={handleSetRememberMe}
-                sx={{
-                  cursor: "pointer",
-                  userSelect: "none",
-                  ml: -1
-                }}
+                color="info"
+                fontWeight="medium"
+                textGradient
               >
-                &nbsp;&nbsp;Remember me
+                Forgot password?
               </MDTypography>
             </MDBox>
 
-            <MDBox display="flex" flexDirection="column" alignItems="left">
-              <MDTypography variant="h7" fontWeight="regular" color="text">
-                This web app is in demo mode. To test it, just create a user
-                account and login.
-              </MDTypography>
-            </MDBox>
-
-            <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" type="submit" fullWidth>
+            <MDBox mt={1} mb={1}>
+              <MDButton
+                variant="gradient"
+                color="success"
+                type="submit"
+                fullWidth
+              >
                 sign in
               </MDButton>
             </MDBox>
@@ -226,18 +180,38 @@ const LoginRoute = ({
                   fontWeight="medium"
                   textGradient
                 >
-                  Sign up
+                  Create an account
                 </MDTypography>
               </MDTypography>
+
+              <MDBox mx={2} mt={-3} p={2} mb={1} textAlign="center">
+                <Grid
+                  container
+                  spacing={3}
+                  justifyContent="center"
+                  sx={{ mt: 1, mb: 2 }}
+                >
+                  <Grid item xs={2}>
+                    <MDTypography
+                      component={MuiLink}
+                      href="#"
+                      variant="body1"
+                      color="white"
+                    >
+                      <GoogleIcon color="inherit" />
+                    </MDTypography>
+                  </Grid>
+                </Grid>
+              </MDBox>
             </MDBox>
           </MDBox>
         </MDBox>
       </Card>
-    </BasicLayout>
+    </CoverLayout>
   );
 };
 
-LoginRoute.propTypes = {
+LoginPage.propTypes = {
   login: PropTypes.func.isRequired,
   clearLoginError: PropTypes.func.isRequired,
   user: PropTypes.object.isRequired
@@ -247,4 +221,4 @@ const mapStateToProps = (state) => ({
   user: state.user
 });
 
-export default connect(mapStateToProps, { login, clearLoginError })(LoginRoute);
+export default connect(mapStateToProps, { login, clearLoginError })(LoginPage);

@@ -28,6 +28,7 @@ import Collapse from "@mui/material/Collapse";
 import { saveSettings } from "store/user/user.action";
 
 const defaultFormData = {
+  registrationCode: "",
   firstname: "",
   lastname: "",
   email: "",
@@ -41,7 +42,7 @@ const defaultUserSettings = {
   sidenavType: "dark"
 };
 
-const RegisterRoute = ({ register, user: { isAuthenticated, error } }) => {
+const RegisterPage = ({ register, user: { isAuthenticated, error } }) => {
   const [rememberMe, setRememberMe] = useState(false);
   const [termsChecked, setTermsChecked] = useState(false);
   const [signupError, setSignupError] = useState();
@@ -119,27 +120,27 @@ const RegisterRoute = ({ register, user: { isAuthenticated, error } }) => {
 
   return (
     <CoverLayout image={bgImage}>
+      <MDBox mx={2} mt={-3} p={3} mb={1} textAlign="center">
+        <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
+          Join us today
+        </MDTypography>
+        <MDTypography display="block" variant="button" color="white" my={1}>
+          Enter your registration code from your trainer
+        </MDTypography>
+      </MDBox>
       <Card>
-        <MDBox
-          variant="gradient"
-          bgColor="info"
-          borderRadius="lg"
-          coloredShadow="success"
-          mx={2}
-          mt={-3}
-          p={3}
-          mb={1}
-          textAlign="center"
-        >
-          <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Join us today
-          </MDTypography>
-          <MDTypography display="block" variant="button" color="white" my={1}>
-            Enter your email and password to register
-          </MDTypography>
-        </MDBox>
         <MDBox pt={4} pb={3} px={3}>
           <MDBox component="form" role="form" onSubmit={onSubmit}>
+            <MDBox mb={2}>
+              <MDInput
+                onChange={onChange}
+                type="text"
+                label="Registration Code"
+                name="registrationCode"
+                variant="standard"
+                fullWidth
+              />
+            </MDBox>
             <MDBox mb={2}>
               <MDInput
                 onChange={onChange}
@@ -227,7 +228,12 @@ const RegisterRoute = ({ register, user: { isAuthenticated, error } }) => {
             </MDBox>
 
             <MDBox mt={4} mb={1}>
-              <MDButton variant="gradient" color="info" type="submit" fullWidth>
+              <MDButton
+                variant="gradient"
+                color="success"
+                type="submit"
+                fullWidth
+              >
                 sign up
               </MDButton>
             </MDBox>
@@ -254,7 +260,7 @@ const RegisterRoute = ({ register, user: { isAuthenticated, error } }) => {
   );
 };
 
-RegisterRoute.propTypes = {
+RegisterPage.propTypes = {
   user: PropTypes.object.isRequired,
   register: PropTypes.func.isRequired,
   saveSettings: PropTypes.func.isRequired
@@ -265,5 +271,5 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, { register, saveSettings })(
-  RegisterRoute
+  RegisterPage
 );

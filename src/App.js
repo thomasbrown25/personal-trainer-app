@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 // react-router components
-import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import store from "store/store";
 import { setAuthToken } from "utils/api.utils";
@@ -11,46 +11,47 @@ import { USER_ACTION_TYPES } from "store/user/user.types";
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import Icon from "@mui/material/Icon";
 
-// Custom components
-import MDBox from "components/MDBox";
-
-// Material Dashboard 2 PRO React examples
-import Sidenav from "components/Sidenav";
-import Configurator from "components/Configurator";
-
+// Styling
 import theme from "assets/theme";
 import themeDark from "assets/theme-dark";
-
-// Utils
-import PrivateRoutes from "utils/private-route";
-
-// Material Dashboard 2 PRO React routes
-
 import "./assets/global.css";
 
+// Components
+import Sidenav from "layouts/sidenav";
+
 // Material Dashboard 2 PRO React contexts
-import {
-  useMaterialUIController,
-  setMiniSidenav,
-  setOpenConfigurator
-} from "context";
+import { useMaterialUIController, setMiniSidenav } from "context";
 
 // Images
 import brandWhite from "assets/images/favicon.png";
 import brandDark from "assets/images/favicon.png";
 
 // Pages
-import LoginRoute from "pages/login/login.page";
-import DashboardRoute from "pages/dashboard/dashboard.page";
-import navbarRoutes from "navbar.routes";
-import UpcomingRoute from "pages/upcoming/upcoming.page";
-import TransactionsRoute from "pages/transactions/transactions.page";
-import RegisterRoute from "pages/register/register.page";
-import SettingsRoute from "pages/settings/settings.page";
-import AccountsRoute from "pages/accounts/accounts.page";
-import ProfileRoute from "pages/profile/profile.page";
+import LoginPage from "pages/login/login.page";
+import RegisterPage from "pages/register/register.page";
+
+// Admin Pages
+import AdminPortalPage from "pages/admin/portal/portal.page";
+import AdminProfilePage from "pages/admin/profile/profile.page";
+import AdminSettingsPage from "pages/admin/settings/settings.page";
+
+// Trainer Pages
+import TrainerPortalPage from "pages/trainer/portal/portal.page";
+import TrainerProfilePage from "pages/trainer/profile/profile.page";
+import TrainerSettingsPage from "pages/trainer/settings/settings.page";
+
+// Client Pages
+import ClientPortalPage from "pages/client/portal/portal.page";
+import ClientProfilePage from "pages/client/profile/profile.page";
+import ClientSettingsPage from "pages/client/settings/settings.page";
+
+// Private Routing
+import AdminRoutes from "utils/private-routing/admin-route";
+import TrainerRoutes from "utils/private-routing/trainer-route";
+import ClientRoutes from "utils/private-routing/client-route";
+
+import sidenavRoutes from "sidenav.routes";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -58,14 +59,12 @@ export default function App() {
     miniSidenav,
     direction,
     layout,
-    openConfigurator,
     sidenavColor,
     transparentSidenav,
     whiteSidenav,
     darkMode
   } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
-  const { pathname } = useLocation();
 
   useEffect(() => {
     // check for token in the local storage when app first runs
@@ -102,10 +101,6 @@ export default function App() {
     }
   };
 
-  // Change the openConfigurator state
-  const handleConfiguratorOpen = () =>
-    setOpenConfigurator(dispatch, !openConfigurator);
-
   // Setting the dir attribute for the body element
   useEffect(() => {
     document.body.setAttribute("dir", direction);
@@ -116,30 +111,6 @@ export default function App() {
   //   document.documentElement.scrollTop = 0;
   //   document.scrollingElement.scrollTop = 0;
   // }, [pathname]);
-
-  const configsButton = (
-    <MDBox
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      width="3.25rem"
-      height="3.25rem"
-      bgColor="white"
-      shadow="sm"
-      borderRadius="50%"
-      position="fixed"
-      right="2rem"
-      bottom="2.5rem"
-      zIndex={99}
-      color="dark"
-      sx={{ cursor: "pointer" }}
-      onClick={handleConfiguratorOpen}
-    >
-      <Icon fontSize="small" color="inherit">
-        settings
-      </Icon>
-    </MDBox>
-  );
 
   return (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
@@ -153,28 +124,39 @@ export default function App() {
                 ? brandDark
                 : brandWhite
             }
-            brandName="Financing App"
-            routes={navbarRoutes}
+            brandName="Personal Trainer"
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
           />
-          <Configurator />
-          {configsButton}
+          {/* <Configurator /> */}
+          {/* {configsButton} */}
         </>
       )}
-      {layout === "vr" && <Configurator />}
+      {/* {layout === "vr" && <Configurator />} */}
 
       <Routes>
-        <Route path="login" element={<LoginRoute />} />
-        <Route path="sign-up" element={<RegisterRoute />} />
-        <Route element={<PrivateRoutes />}>
-          <Route index path="/dashboard" element={<DashboardRoute />} />
-          <Route path="/upcoming" element={<UpcomingRoute />} />
-          <Route path="/transactions" element={<TransactionsRoute />} />
-          <Route path="/accounts" element={<AccountsRoute />} />
-          <Route path="/profile" element={<ProfileRoute />} />
-          <Route path="/settings" element={<SettingsRoute />} />
-          <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="sign-up" element={<RegisterPage />} />
+
+        <Route element={<AdminRoutes />}>
+          <Route index path="/admin-portal" element={<AdminPortalPage />} />
+          <Route path="/admin-profile" element={<AdminProfilePage />} />
+          <Route path="/admin-settings" element={<AdminSettingsPage />} />
+          <Route path="*" element={<Navigate to="/admin-portal" />} />
+        </Route>
+
+        <Route element={<TrainerRoutes />}>
+          <Route index path="/trainer-portal" element={<TrainerPortalPage />} />
+          <Route path="/trainer-profile" element={<TrainerProfilePage />} />
+          <Route path="/trainer-settings" element={<TrainerSettingsPage />} />
+          <Route path="*" element={<Navigate to="/trainer-portal" />} />
+        </Route>
+
+        <Route element={<ClientRoutes />}>
+          <Route index path="/client-portal" element={<ClientPortalPage />} />
+          <Route path="/client-profile" element={<ClientProfilePage />} />
+          <Route path="/client-settings" element={<ClientSettingsPage />} />
+          <Route path="*" element={<Navigate to="/client-portal" />} />
         </Route>
       </Routes>
     </ThemeProvider>

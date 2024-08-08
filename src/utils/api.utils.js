@@ -1,13 +1,13 @@
-import axios from 'axios';
-import store from 'store/store';
-import { USER_ACTION_TYPES } from 'store/user/user.types';
+import axios from "axios";
+import store from "store/store";
+import { USER_ACTION_TYPES } from "store/user/user.types";
 // import { LOGOUT } from '../actions/types';
 
 // Create an instance of axios
 export const api = axios.create({
-  baseURL: process.env.REACT_APP_API,
+  baseURL: "https://localhost:5001/",
   headers: {
-    'Content-Type': 'application/json; charset=utf-8'
+    "Content-Type": "application/json; charset=utf-8"
   }
 });
 
@@ -45,11 +45,11 @@ api.interceptors.response.use(
 
 export const setAuthToken = (token) => {
   if (token) {
-    api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    localStorage.setItem('token', token);
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    localStorage.setItem("token", token);
   } else {
-    delete api.defaults.headers.common['bearer'];
-    localStorage.removeItem('token');
+    delete api.defaults.headers.common["bearer"];
+    localStorage.removeItem("token");
   }
 };
 
