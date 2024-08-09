@@ -120,8 +120,13 @@ function DashboardNavbar({ absolute, light, isMini, logout }) {
               </Icon>
             </IconButton>
             <Link to="/">
-              <MDTypography variant="h4" textTransform="capitalize" pl={1}>
-                {`${user.role} Portal`}
+              <MDTypography
+                variant="h4"
+                textTransform="capitalize"
+                pl={1}
+                fontWeight="medium"
+              >
+                {`${user.role} Dashboard`}
               </MDTypography>
             </Link>
           </MDBox>

@@ -13,7 +13,7 @@ const sidenav = {
     root: {
       width: pxToRem(250),
       whiteSpace: "nowrap",
-      border: "none"
+      border: `1px solid ${background.dark} !important`
     },
 
     paper: {
@@ -21,12 +21,11 @@ const sidenav = {
       backgroundColor: background.white,
       height: `calc(100vh - ${pxToRem(32)})`,
       margin: pxToRem(16),
-      borderRadius: borderRadius.xl,
-      border: "none"
+      border: `1px solid ${background.dark} !important`
     },
 
     paperAnchorDockedLeft: {
-      borderRight: "none"
+      //borderRight: "none"
     }
   }
 };

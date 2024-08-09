@@ -6,7 +6,7 @@ const adminRoutes = [
     type: "collapse",
     name: "Dashboard",
     key: "dashboard",
-    route: "/admin-portal",
+    route: "/admin-dashboard",
     icon: <Icon fontSize="medium">dashboard</Icon>,
     noCollapse: true
   },

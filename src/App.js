@@ -32,17 +32,17 @@ import LoginPage from "pages/login/login.page";
 import RegisterPage from "pages/register/register.page";
 
 // Admin Pages
-import AdminPortalPage from "pages/admin/portal/portal.page";
+import AdminDashboardPage from "pages/admin/dashboard/dashboard.page";
 import AdminProfilePage from "pages/admin/profile/profile.page";
 import AdminSettingsPage from "pages/admin/settings/settings.page";
 
 // Trainer Pages
-import TrainerPortalPage from "pages/trainer/portal/portal.page";
+import TrainerDashboardPage from "pages/trainer/dashboard/dashboard.page";
 import TrainerProfilePage from "pages/trainer/profile/profile.page";
 import TrainerSettingsPage from "pages/trainer/settings/settings.page";
 
 // Client Pages
-import ClientPortalPage from "pages/client/portal/portal.page";
+import ClientDashboardPage from "pages/client/dashboard/dashboard.page";
 import ClientProfilePage from "pages/client/profile/profile.page";
 import ClientSettingsPage from "pages/client/settings/settings.page";
 
@@ -139,24 +139,36 @@ export default function App() {
         <Route path="sign-up" element={<RegisterPage />} />
 
         <Route element={<AdminRoutes />}>
-          <Route index path="/admin-portal" element={<AdminPortalPage />} />
+          <Route
+            index
+            path="/admin-dashboard"
+            element={<AdminDashboardPage />}
+          />
           <Route path="/admin-profile" element={<AdminProfilePage />} />
           <Route path="/admin-settings" element={<AdminSettingsPage />} />
-          <Route path="*" element={<Navigate to="/admin-portal" />} />
+          <Route path="*" element={<Navigate to="/admin-dashboard" />} />
         </Route>
 
         <Route element={<TrainerRoutes />}>
-          <Route index path="/trainer-portal" element={<TrainerPortalPage />} />
+          <Route
+            index
+            path="/trainer-dashboard"
+            element={<TrainerDashboardPage />}
+          />
           <Route path="/trainer-profile" element={<TrainerProfilePage />} />
           <Route path="/trainer-settings" element={<TrainerSettingsPage />} />
-          <Route path="*" element={<Navigate to="/trainer-portal" />} />
+          <Route path="*" element={<Navigate to="/trainer-dashboard" />} />
         </Route>
 
         <Route element={<ClientRoutes />}>
-          <Route index path="/client-portal" element={<ClientPortalPage />} />
+          <Route
+            index
+            path="/client-dashboard"
+            element={<ClientDashboardPage />}
+          />
           <Route path="/client-profile" element={<ClientProfilePage />} />
           <Route path="/client-settings" element={<ClientSettingsPage />} />
-          <Route path="*" element={<Navigate to="/client-portal" />} />
+          <Route path="*" element={<Navigate to="/client-dashboard" />} />
         </Route>
       </Routes>
     </ThemeProvider>

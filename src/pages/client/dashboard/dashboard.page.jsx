@@ -18,9 +18,9 @@ import moment from "moment";
 import MDBox from "components/MDBox";
 import TrainerVideo from "components/TrainerVideo/trainer-video.component";
 
-const DashboardRoute = ({ user: { currentUser, loading } }) => {
+const ClientDashboardPage = ({ user: { currentUser, loading } }) => {
   return (
-    <MainLayout pageTitle="Trainer Portal">
+    <MainLayout pageTitle="Trainer Dashboard">
       <Grid container spacing={2} className="jc-center">
         <Grid item xs={12} lg={12}>
           <Card
@@ -63,7 +63,7 @@ const DashboardRoute = ({ user: { currentUser, loading } }) => {
     </MainLayout>
   );
 };
-DashboardRoute.propTypes = {
+ClientDashboardPage.propTypes = {
   user: PropTypes.object.isRequired
 };
 
@@ -71,4 +71,4 @@ const mapStateToProps = (state) => ({
   user: state.user
 });
 
-export default connect(mapStateToProps, {})(DashboardRoute);
+export default connect(mapStateToProps, {})(ClientDashboardPage);

@@ -58,11 +58,11 @@ const LoginPage = ({
   useEffect(() => {
     if (isAuthenticated) {
       if (userRole === "Admin") {
-        navigate("/admin-portal");
+        navigate("/admin-dashboard");
       } else if (userRole === "Trainer") {
-        navigate("/trainer-portal");
+        navigate("/trainer-dashboard");
       } else if (userRole === "Client") {
-        navigate("/client-portal");
+        navigate("/client-dashboard");
       }
     }
   }, [isAuthenticated, navigate, userRole]);

@@ -1,6 +1,6 @@
 // @mui material components
-import Typography from '@mui/material/Typography';
-import { styled } from '@mui/material/styles';
+import Typography from "@mui/material/Typography";
+import { styled } from "@mui/material/styles";
 
 export default styled(Typography)(({ theme, ownerState }) => {
   const { palette, typography, functions } = theme;
@@ -11,7 +11,8 @@ export default styled(Typography)(({ theme, ownerState }) => {
     fontWeight,
     opacity,
     textGradient,
-    darkMode
+    darkMode,
+    underlineOnHover
   } = ownerState;
 
   const { gradients, transparent, white } = palette;
@@ -34,34 +35,40 @@ export default styled(Typography)(({ theme, ownerState }) => {
   // styles for the typography with textGradient={true}
   const gradientStyles = () => ({
     backgroundImage:
-      color !== 'inherit' &&
-      color !== 'text' &&
-      color !== 'white' &&
+      color !== "inherit" &&
+      color !== "text" &&
+      color !== "white" &&
       gradients[color]
         ? linearGradient(gradients[color].main, gradients[color].state)
         : linearGradient(gradients.dark.main, gradients.dark.state),
-    display: 'inline-block',
-    WebkitBackgroundClip: 'text',
+    display: "inline-block",
+    WebkitBackgroundClip: "text",
     WebkitTextFillColor: transparent.main,
-    position: 'relative',
+    position: "relative",
     zIndex: 1
+  });
+
+  // styles for the typography with underlineOnHover={true}
+  const underlineOnHoverStyle = () => ({
+    ":hover": { textDecoration: "underline !important" }
   });
 
   // color value
   let colorValue =
-    color === 'inherit' || !palette[color] ? 'inherit' : palette[color].main;
+    color === "inherit" || !palette[color] ? "inherit" : palette[color].main;
 
-  if (darkMode && (color === 'inherit' || !palette[color])) {
-    colorValue = 'inherit';
-  } else if (darkMode && color === 'dark') colorValue = white.main;
+  if (darkMode && (color === "inherit" || !palette[color])) {
+    colorValue = "inherit";
+  } else if (darkMode && color === "dark") colorValue = white.main;
 
   return {
     opacity,
     textTransform,
     verticalAlign,
-    textDecoration: 'none',
+    textDecoration: "none",
     color: colorValue,
     fontWeight: fontWeights[fontWeight] && fontWeights[fontWeight],
-    ...(textGradient && gradientStyles())
+    ...(textGradient && gradientStyles()),
+    ...(underlineOnHover && underlineOnHoverStyle())
   };
 });

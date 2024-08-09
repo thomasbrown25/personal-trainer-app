@@ -21,8 +21,8 @@ const card = {
       backgroundImage: "none",
       backgroundColor: background.card,
       backgroundClip: "border-box",
-      border: `${borderWidth[0]} solid ${rgba(black.main, 0.125)}`,
-      borderRadius: borderRadius.xl,
+      border: `${borderWidth[1]} solid ${background.border} !important`,
+      borderRadius: borderRadius.md,
       boxShadow: md,
       overflow: "visible"
     }

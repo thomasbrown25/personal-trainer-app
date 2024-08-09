@@ -12,6 +12,7 @@ import MDBox from "components/MDBox";
 import { useMaterialUIController, setLayout } from "context";
 import HeaderImage from "components/HeaderImage/header-image.component";
 import DashboardNavbar from "layouts/dashboard-navbar";
+import Footer from "layouts/footer";
 
 const MainLayout = ({ children, pageTitle }) => {
   const [controller, dispatch] = useMaterialUIController();
@@ -39,7 +40,9 @@ const MainLayout = ({ children, pageTitle }) => {
       })}
     >
       <DashboardNavbar pageTitle={pageTitle} />
+
       {children}
+      <Footer />
     </MDBox>
   );
 };
