@@ -1,17 +1,14 @@
 // Components
 import MDBox from "components/MDBox";
 
-const Image = ({ imageUrl, borderRadius, minHeight }) => {
+const Image = ({ imageUrl, borderRadius, border, height, width }) => {
   return (
     <MDBox
       position="relative"
-      mb={2}
       display="flex"
       alignItems="center"
-      minHeight={minHeight}
-      minWidth="100%"
-      borderRadius={borderRadius}
-      mt={2}
+      height={height}
+      width={width}
     >
       <img
         src={imageUrl}
@@ -19,7 +16,8 @@ const Image = ({ imageUrl, borderRadius, minHeight }) => {
         style={{
           width: "100%",
           height: "100%",
-          borderRadius: { borderRadius }
+          border: border,
+          borderRadius: borderRadius
         }}
       />
     </MDBox>

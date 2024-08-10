@@ -22,6 +22,10 @@ import TrainerVideo from "components/TrainerVideo/trainer-video.component";
 import moment from "moment";
 import Image from "components/Image/image.component";
 
+// css
+import colors from "assets/theme-dark/base/colors";
+const { background } = colors;
+
 const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
   return (
     <MainLayout pageTitle="Trainer Dashboard">
@@ -36,25 +40,19 @@ const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
           justifyContent="center"
           alignItems="flex-start"
           flexWrap="wrap"
-          width="80%"
+          width="100%"
           maxWidth="1400px"
         >
           {/* Left Panel */}
           <MDBox width="30%" px={1}>
             <Image
-              imageUrl={require("assets/images/bg-profile.jpeg")}
-              minHeight="14rem"
+              imageUrl={require("assets/images/me/me-and-isaiah.jpg")}
+              height="19rem"
+              width="100%"
+              border={`3px solid ${background.border}`}
               borderRadius="50%"
             />
-            <DefaultStatisticsCard
-              title="clients"
-              count="120"
-              percentage={{
-                color: "success",
-                value: "+10%",
-                label: "since last month"
-              }}
-            />
+            <MDButton>Edit profile</MDButton>
           </MDBox>
 
           {/* Right Panel */}
