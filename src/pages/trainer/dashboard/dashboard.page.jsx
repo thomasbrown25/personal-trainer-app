@@ -52,7 +52,16 @@ const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
               border={`3px solid ${background.border}`}
               borderRadius="50%"
             />
-            <MDButton>Edit profile</MDButton>
+            <MDBox mt={2}>
+              <MDButton
+                variant="gradient"
+                sx={{ backgroundColor: background.grey }}
+                type="submit"
+                fullWidth
+              >
+                Edit profile
+              </MDButton>
+            </MDBox>
           </MDBox>
 
           {/* Right Panel */}

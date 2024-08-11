@@ -6,13 +6,14 @@
 
 const colors = {
   background: {
-    default: "#000003",
+    default: "#0d1117",
     secondary: "#0d1117",
-    sidenav: "#0d1117",
+    sidenav: "#000003",
     card: "#0d1117",
     border: "#30363db3",
     dark: "#010409",
-    white: "#ffffff"
+    white: "#ffffff",
+    grey: "#21262d"
   },
 
   text: {
