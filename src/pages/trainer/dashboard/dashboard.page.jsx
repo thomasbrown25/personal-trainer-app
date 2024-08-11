@@ -160,7 +160,7 @@ const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
                 </MDTypography>
                 <MDTypography
                   component={Link}
-                  to="/workouts-add-new-video"
+                  to="/client-management"
                   variant="button"
                   color="info"
                   underlineOnHover

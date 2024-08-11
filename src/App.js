@@ -52,6 +52,7 @@ import TrainerRoutes from "utils/private-routing/trainer-route";
 import ClientRoutes from "utils/private-routing/client-route";
 
 import sidenavRoutes from "sidenav.routes";
+import ClientManagementPage from "pages/trainer/client-management/client-management.page";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -157,6 +158,7 @@ export default function App() {
           />
           <Route path="/trainer-profile" element={<TrainerProfilePage />} />
           <Route path="/trainer-settings" element={<TrainerSettingsPage />} />
+          <Route path="/client-management" element={<ClientManagementPage />} />
           <Route path="*" element={<Navigate to="/trainer-dashboard" />} />
         </Route>
 
