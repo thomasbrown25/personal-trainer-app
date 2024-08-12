@@ -52,3 +52,20 @@
 .cursor {
   cursor: pointer;
 }
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+:hover::-webkit-scrollbar-thumb {
+  background: "black !important";
+}
+:hover::-webkit-scrollbar-track {
+  background: "black !important";
+}
+
+:hover {
+  --fix: ; /* This custom property invalidates styles on hover, thereby enforcing a style recomputation. This is needed to work around a bug in Safari. */
+}

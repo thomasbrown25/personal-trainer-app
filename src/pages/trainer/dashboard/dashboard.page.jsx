@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import MainLayout from "layouts/main-layout";
 
 // Mui components
-import { Grid, Card } from "@mui/material";
+import { Grid, Card, Avatar } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -45,12 +45,10 @@ const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
         >
           {/* Left Panel */}
           <MDBox width="30%" px={1}>
-            <Image
-              imageUrl={require("assets/images/me/me-and-isaiah.jpg")}
-              height="19rem"
-              width="100%"
-              border={`3px solid ${background.border}`}
-              borderRadius="50%"
+            <Avatar
+              alt="Remy Sharp"
+              src={require("assets/images/me/me-and-isaiah.jpg")}
+              sx={{ width: "100%", height: "20rem" }}
             />
             <MDBox mt={2}>
               <MDButton
@@ -68,14 +66,14 @@ const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
           <MDBox width="70%" px={1}>
             {/* Trainer Videos */}
             <Grid container spacing={2} className="jc-center">
-              <Grid item xs={12} sm={12} md={12}>
+              <Grid item xs={12}>
                 <MDBox display="flex" justifyContent="space-between">
                   <MDTypography variant="h6" fontWeight="medium">
                     Workout videos
                   </MDTypography>
                   <MDTypography
                     component={Link}
-                    to="/workouts-add-new-video"
+                    to="/workouts"
                     variant="button"
                     color="info"
                     underlineOnHover
@@ -87,7 +85,7 @@ const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
 
               <Grid item xs={12} lg={6}>
                 <DefaultStatisticsCard
-                  title="clients"
+                  title="workout video 1"
                   count="120"
                   percentage={{
                     color: "success",
@@ -98,7 +96,7 @@ const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
               </Grid>
               <Grid item xs={12} lg={6}>
                 <DefaultStatisticsCard
-                  title="clients"
+                  title="workout video 2"
                   count="120"
                   percentage={{
                     color: "success",
@@ -109,7 +107,7 @@ const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
               </Grid>
               <Grid item xs={12} lg={6}>
                 <DefaultStatisticsCard
-                  title="clients"
+                  title="workout video 3"
                   count="120"
                   percentage={{
                     color: "success",
@@ -120,7 +118,7 @@ const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
               </Grid>
               <Grid item xs={12} lg={6}>
                 <DefaultStatisticsCard
-                  title="clients"
+                  title="workout video 4"
                   count="120"
                   percentage={{
                     color: "success",
@@ -131,7 +129,7 @@ const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
               </Grid>
               <Grid item xs={12} lg={6}>
                 <DefaultStatisticsCard
-                  title="clients"
+                  title="workout video 5"
                   count="120"
                   percentage={{
                     color: "success",
@@ -142,7 +140,7 @@ const TrainerDashboardPage = ({ user: { currentUser, loading } }) => {
               </Grid>
               <Grid item xs={12} lg={6}>
                 <DefaultStatisticsCard
-                  title="clients"
+                  title="workout video 6"
                   count="120"
                   percentage={{
                     color: "success",

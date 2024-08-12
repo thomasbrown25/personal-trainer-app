@@ -11,7 +11,7 @@ const colors = {
     sidenav: "#000003",
     card: "#0d1117",
     border: "#30363db3",
-    dark: "#010409",
+    dark: "#000003",
     white: "#ffffff",
     grey: "#21262d"
   },
