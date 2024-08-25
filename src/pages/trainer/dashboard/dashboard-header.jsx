@@ -21,13 +21,13 @@ import MDAvatar from "components/MDAvatar";
 import breakpoints from "assets/theme/base/breakpoints";
 
 // Images
-import burceMars from "assets/images/favicon.png";
+import logo from "assets/images/favicon.png";
 import backgroundImage from "assets/images/bg-profile.jpeg";
 
 // store
 import { selectCurrentUser } from "store/user/user.selector";
 
-function ProfileHeader({ children }) {
+function DashboardHeader({ children }) {
   const [tabsOrientation, setTabsOrientation] = useState("horizontal");
   const [tabValue, setTabValue] = useState(0);
 
@@ -68,20 +68,15 @@ function ProfileHeader({ children }) {
       >
         <Grid container spacing={3} alignItems="center">
           <Grid item>
-            <MDAvatar
-              src={burceMars}
-              alt="profile-image"
-              size="l"
-              shadow="sm"
-            />
+            <MDAvatar src={logo} alt="profile-image" size="l" shadow="sm" />
           </Grid>
           <Grid item>
             <MDBox height="100%" mt={0.5} lineHeight={1}>
               <MDTypography variant="h4" fontWeight="medium">
-                {`${user.firstname} ${user.lastname}`}
+                {`${user?.firstname} ${user?.lastname}`}
               </MDTypography>
               <MDTypography variant="button" color="text" fontWeight="regular">
-                'Role'
+                {user?.role}
               </MDTypography>
             </MDBox>
           </Grid>
@@ -93,7 +88,7 @@ function ProfileHeader({ children }) {
                 onChange={handleSetTabValue}
               >
                 <Tab
-                  label="App"
+                  label="Dashboard"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
                       home
@@ -101,10 +96,18 @@ function ProfileHeader({ children }) {
                   }
                 />
                 <Tab
-                  label="Message"
+                  label="Clients"
                   icon={
                     <Icon fontSize="small" sx={{ mt: -0.25 }}>
-                      email
+                      people
+                    </Icon>
+                  }
+                />
+                <Tab
+                  label="Workouts"
+                  icon={
+                    <Icon fontSize="small" sx={{ mt: -0.25 }}>
+                      videocam
                     </Icon>
                   }
                 />
@@ -126,14 +129,14 @@ function ProfileHeader({ children }) {
   );
 }
 
-// Setting default props for the ProfileHeader
-ProfileHeader.defaultProps = {
+// Setting default props for the DashboardHeader
+DashboardHeader.defaultProps = {
   children: ""
 };
 
-// Typechecking props for the ProfileHeader
-ProfileHeader.propTypes = {
+// Typechecking props for the DashboardHeader
+DashboardHeader.propTypes = {
   children: PropTypes.node
 };
 
-export default ProfileHeader;
+export default DashboardHeader;

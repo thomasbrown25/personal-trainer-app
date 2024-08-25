@@ -26,9 +26,9 @@ import SidenavRoot from "layouts/sidenav/components/SidenavRoot";
 import sidenavLogoLabel from "layouts/sidenav/styles/sidenav";
 
 // Routes
-import adminRoutes from "utils/routes/admin.routes";
-import trainerRoutes from "utils/routes/trainer.routes";
-import clientRoutes from "utils/routes/client.routes";
+import adminRoutes from "routes/admin.routes";
+import trainerRoutes from "routes/trainer.routes";
+import clientRoutes from "routes/client.routes";
 
 // Actions
 import { logout } from "store/user/user.action";
@@ -362,7 +362,7 @@ Sidenav.propTypes = {
   ]),
   brand: PropTypes.string,
   brandName: PropTypes.string.isRequired,
-  routes: PropTypes.arrayOf(PropTypes.object).isRequired,
+  routes: PropTypes.arrayOf(PropTypes.object),
   logout: PropTypes.func.isRequired
 };
 

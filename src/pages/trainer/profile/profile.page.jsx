@@ -38,14 +38,15 @@ import team1 from "assets/images/favicon.png";
 import team2 from "assets/images/favicon.png";
 import team3 from "assets/images/favicon.png";
 import team4 from "assets/images/favicon.png";
+import AppHeader from "../components/app-header";
 
-function ProfileRoute() {
+function TrainerProfilePage() {
   const user = useSelector(selectCurrentUser);
 
   return (
     <MainLayout>
       <MDBox mb={2} />
-      <ProfileHeader>
+      <AppHeader>
         <MDBox mt={5} mb={3}>
           <Grid container spacing={1}>
             <Grid item xs={12} md={6} xl={4} sx={{ display: "flex" }}>
@@ -161,10 +162,9 @@ function ProfileRoute() {
             </Grid>
           </Grid>
         </MDBox>
-      </ProfileHeader>
-      <Footer />
+      </AppHeader>
     </MainLayout>
   );
 }
 
-export default ProfileRoute;
+export default TrainerProfilePage;
