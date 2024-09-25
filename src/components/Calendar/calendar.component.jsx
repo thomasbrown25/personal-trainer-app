@@ -85,7 +85,7 @@ function Calendar({ header, ...rest }) {
 
   return (
     <>
-      <Card sx={{ height: "100%" }}>
+      <Card>
         <MDBox pt={header.title || header.date ? 2 : 0} px={2} lineHeight={1}>
           {header.title ? (
             <MDTypography

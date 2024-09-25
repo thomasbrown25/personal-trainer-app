@@ -50,7 +50,8 @@ function WorkoutVideoCard({
         flexDirection: "column",
         backgroundColor: "transparent",
         boxShadow: "none",
-        overflow: "visible"
+        overflow: "visible",
+        padding: 2
       }}
     >
       <MDBox position="relative" width="100.25%" shadow="xl" borderRadius="xl">

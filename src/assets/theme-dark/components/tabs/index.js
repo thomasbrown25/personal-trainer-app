@@ -13,38 +13,38 @@ const { md } = boxShadows;
 const tabs = {
   styleOverrides: {
     root: {
-      // position: "absolute",
-      // backgroundColor: background.card,
-      // borderRadius: borderRadius.xl,
-      // minHeight: "2px",
-      // padding: pxToRem(4)
+      //position: "absolute",
+      //backgroundColor: background.card,
+      //borderRadius: borderRadius.xl,
+      //  minHeight: "2px",
+      padding: pxToRem(4)
     },
 
     flexContainer: {
-      // height: "100%",
-      // position: "relative",
-      // zIndex: 10
+      height: "100%",
+      position: "relative",
+      zIndex: 10
     },
 
     fixed: {
-      // overflow: "unset !important",
-      // overflowX: "unset !important"
+      overflow: "unset !important",
+      overflowX: "unset !important"
     },
 
     vertical: {
       "& .MuiTabs-indicator": {
-        //  width: "100%"
+        width: "100%"
       }
     },
 
     indicator: {
-      //  display: "none",
-      //  height: "2px",
-      // width: "80px",
-      // borderRadius: borderRadius.lg,
-      // backgroundColor: background.white,
-      // boxShadow: md,
-      // transition: "all 500ms ease"
+      display: "none",
+      height: "2px",
+      width: "70px",
+      borderRadius: borderRadius.lg,
+      backgroundColor: background.white,
+      boxShadow: md,
+      transition: "all 500ms ease"
     }
   }
 };

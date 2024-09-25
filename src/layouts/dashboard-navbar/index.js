@@ -96,9 +96,7 @@ function DashboardNavbar({ absolute, light, isMini, logout }) {
     <AppBar
       position={absolute ? "absolute" : navbarType}
       color="inherit"
-      sx={(theme) =>
-        navbar(theme, { transparentNavbar, absolute, light, darkMode })
-      }
+      sx={{ background: "#000003" }}
     >
       <Toolbar sx={(theme) => navbarContainer(theme)}>
         <MDBox
@@ -121,10 +119,11 @@ function DashboardNavbar({ absolute, light, isMini, logout }) {
             </IconButton>
             <Link to="/">
               <MDTypography
-                variant="h4"
+                variant="h5"
                 textTransform="capitalize"
                 pl={1}
                 fontWeight="medium"
+                lineHeight={1.75}
               >
                 {`${user.role} Dashboard`}
               </MDTypography>

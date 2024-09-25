@@ -9,6 +9,9 @@ import MDTypographyRoot from "components/MDTypography/MDTypographyRoot";
 // Material Dashboard 2 PRO React contexts
 import { useMaterialUIController } from "context";
 
+import colors from "assets/theme-dark/base/colors";
+const { background } = colors;
+
 const MDTypography = forwardRef(
   (
     {
@@ -72,7 +75,8 @@ MDTypography.propTypes = {
     "light",
     "dark",
     "text",
-    "white"
+    "white",
+    "#3d444d"
   ]),
   fontWeight: PropTypes.oneOf([false, "light", "regular", "medium", "bold"]),
   textTransform: PropTypes.oneOf([

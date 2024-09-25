@@ -10,9 +10,10 @@ import MDBox from "components/MDBox";
 
 // Material Dashboard 2 PRO React context
 import { useMaterialUIController, setLayout } from "context";
-import HeaderImage from "components/HeaderImage/header-image.component";
 import DashboardNavbar from "layouts/dashboard-navbar";
 import Footer from "layouts/footer";
+import { max } from "moment";
+import SubNavbar from "layouts/sub-navbar";
 
 const MainLayout = ({ children, pageTitle }) => {
   const [controller, dispatch] = useMaterialUIController();
@@ -24,26 +25,31 @@ const MainLayout = ({ children, pageTitle }) => {
   }, [pathname]);
 
   return (
-    <MDBox
-      sx={({ breakpoints, transitions, functions: { pxToRem } }) => ({
-        p: 3,
-        position: "relative",
-        minHeight: "97vh",
+    <>
+      <DashboardNavbar />
+      {/* <SubNavbar /> */}
+      <MDBox display="flex" justifyContent="center" width="100%">
+        <MDBox
+          sx={({ breakpoints, transitions, functions: { pxToRem } }) => ({
+            p: 3,
+            position: "relative",
+            minHeight: "97vh",
+            maxWidth: "1280px",
 
-        [breakpoints.up("xl")]: {
-          marginLeft: miniSidenav ? pxToRem(120) : pxToRem(274),
-          transition: transitions.create(["margin-left", "margin-right"], {
-            easing: transitions.easing.easeInOut,
-            duration: transitions.duration.standard
-          })
-        }
-      })}
-    >
-      <DashboardNavbar pageTitle={pageTitle} />
-
-      {children}
-      <Footer />
-    </MDBox>
+            [breakpoints.up("xl")]: {
+              marginLeft: miniSidenav ? pxToRem(120) : pxToRem(274),
+              transition: transitions.create(["margin-left", "margin-right"], {
+                easing: transitions.easing.easeInOut,
+                duration: transitions.duration.standard
+              })
+            }
+          })}
+        >
+          {children}
+          <Footer />
+        </MDBox>
+      </MDBox>
+    </>
   );
 };
 

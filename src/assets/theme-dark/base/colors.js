@@ -10,7 +10,7 @@ const colors = {
     secondary: "#0d1117",
     sidenav: "#000003",
     card: "#0d1117",
-    border: "#30363db3",
+    border: "#3d444d",
     dark: "#000003",
     white: "#ffffff",
     grey: "#21262d"

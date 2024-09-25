@@ -119,7 +119,7 @@ export default function App() {
       <CssBaseline />
       {layout === "dashboard" && (
         <>
-          <Sidenav
+          {/* <Sidenav
             color={sidenavColor}
             brand={
               (transparentSidenav && !darkMode) || whiteSidenav
@@ -131,7 +131,6 @@ export default function App() {
             onMouseLeave={handleOnMouseLeave}
           />
           {/* <Configurator /> */}
-          {/* {configsButton} */}
         </>
       )}
       {/* {layout === "vr" && <Configurator />} */}
