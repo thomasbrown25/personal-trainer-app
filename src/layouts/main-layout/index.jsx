@@ -37,7 +37,7 @@ const MainLayout = ({ children, pageTitle }) => {
             maxWidth: "1280px",
 
             [breakpoints.up("xl")]: {
-              marginLeft: miniSidenav ? pxToRem(120) : pxToRem(274),
+              //marginLeft: miniSidenav ? pxToRem(120) : pxToRem(274),
               transition: transitions.create(["margin-left", "margin-right"], {
                 easing: transitions.easing.easeInOut,
                 duration: transitions.duration.standard

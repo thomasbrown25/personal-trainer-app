@@ -51,23 +51,16 @@ function WorkoutVideoCard({
         backgroundColor: "transparent",
         boxShadow: "none",
         overflow: "visible",
-        padding: 2
+        padding: 2,
+        margin: 1
       }}
     >
-      <MDBox position="relative" width="100.25%" shadow="xl" borderRadius="xl">
-        <CardMedia
-          src={image}
-          component="img"
-          title={title}
-          sx={{
-            maxWidth: "100%",
-            margin: 0,
-            boxShadow: ({ boxShadows: { md } }) => md,
-            objectFit: "cover",
-            objectPosition: "center"
-          }}
-        />
-      </MDBox>
+      <MDBox
+        position="relative"
+        width="100.25%"
+        shadow="xl"
+        borderRadius="xl"
+      ></MDBox>
       <MDBox mt={1} mx={0.5}>
         <MDTypography
           variant="button"
