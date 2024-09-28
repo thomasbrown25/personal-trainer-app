@@ -30,6 +30,15 @@ const ClientPreview = () => {
         <MDTypography variant="h5" fontWeight="medium">
           Clients
         </MDTypography>
+        <MDTypography
+          variant="button"
+          color="info"
+          component={Link}
+          to="/trainer-client-management"
+          sx={{ "&:hover": { textDecoration: "underline !important" } }}
+        >
+          Manage your clients
+        </MDTypography>
       </MDBox>
 
       <MDBox
@@ -49,6 +58,7 @@ const ClientPreview = () => {
       <MDBox>
         {clientData.map((client, i) => (
           <MDBox
+            key={i}
             display="flex"
             justifyContent="space-between"
             width="100%"

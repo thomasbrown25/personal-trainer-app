@@ -55,21 +55,7 @@ function WorkoutVideoCard({
         margin: 1
       }}
     >
-      <MDBox
-        position="relative"
-        width="100.25%"
-        shadow="xl"
-        borderRadius="xl"
-      ></MDBox>
       <MDBox mt={1} mx={0.5}>
-        <MDTypography
-          variant="button"
-          fontWeight="regular"
-          color="text"
-          textTransform="capitalize"
-        >
-          {label}
-        </MDTypography>
         <MDBox mb={1}>
           {action.type === "internal" ? (
             <MDTypography
