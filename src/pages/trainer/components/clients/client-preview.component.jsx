@@ -1,10 +1,16 @@
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
+import { useEffect, useState } from "react";
+import { connect, useSelector } from "react-redux";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import moment from "moment";
+
+// components
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import { DataGrid } from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
+
+// actions
+import { selectCurrentUser } from "store/user/user.selector";
+import { getClients } from "store/trainer/trainer.action";
 
 const clientData = [
   { name: "Osiris Simmons", lastViewed: "5 hours ago" },
@@ -17,7 +23,13 @@ const clientData = [
   { name: "Dangelo Nielsen", lastViewed: "1 month ago" }
 ];
 
-const ClientPreview = () => {
+const ClientPreview = ({ trainer: { clients }, getClients }) => {
+  const user = useSelector(selectCurrentUser);
+
+  useEffect(() => {
+    getClients(user?.id);
+  }, [getClients, user?.id]);
+
   return (
     <MDBox sx={{ height: 400, width: "100%" }}>
       <MDBox
@@ -56,39 +68,52 @@ const ClientPreview = () => {
       </MDBox>
 
       <MDBox>
-        {clientData.map((client, i) => (
-          <MDBox
-            key={i}
-            display="flex"
-            justifyContent="space-between"
-            width="100%"
-            borderBottom="0.0625rem solid #3d444d!important"
-          >
-            <MDTypography
-              variant="h6"
-              fontWeight="regular"
+        {clients.length > 0 ? (
+          clients.map((client, i) => (
+            <MDBox
+              key={i}
               display="flex"
-              py={0.5}
-              component={Link}
-              to="/client-profile"
-              color="info"
-              sx={{ "&:hover": { textDecoration: "underline !important" } }}
+              justifyContent="space-between"
+              width="100%"
+              borderBottom="0.0625rem solid #3d444d!important"
             >
-              {client.name}
-            </MDTypography>
-            <MDTypography
-              variant="h6"
-              fontWeight="regular"
-              display="flex"
-              py={0.5}
-            >
-              {client.lastViewed}
-            </MDTypography>
-          </MDBox>
-        ))}
+              <MDTypography
+                variant="h6"
+                fontWeight="regular"
+                display="flex"
+                py={0.5}
+                component={Link}
+                to="/client-profile"
+                color="info"
+                sx={{ "&:hover": { textDecoration: "underline !important" } }}
+              >
+                {client.firstname} {client.lastname}
+              </MDTypography>
+              <MDTypography
+                variant="h6"
+                fontWeight="regular"
+                display="flex"
+                py={0.5}
+              >
+                {moment(client.lastVisited).format("MMM Do, h:mm:ss a")}
+              </MDTypography>
+            </MDBox>
+          ))
+        ) : (
+          <MDTypography variant="h6">No Clients </MDTypography>
+        )}
       </MDBox>
     </MDBox>
   );
 };
 
-export default ClientPreview;
+ClientPreview.propTypes = {
+  trainer: PropTypes.object.isRequired,
+  getClients: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => ({
+  trainer: state.trainer
+});
+
+export default connect(mapStateToProps, { getClients })(ClientPreview);
