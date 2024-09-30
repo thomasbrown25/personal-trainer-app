@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import MainLayout from "layouts/main-layout";
+import moment from "moment";
 
 // Mui components
-import { Grid, Card, Divider, Avatar } from "@mui/material";
+import { Grid, Card, Divider, Avatar, CardContent } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
@@ -15,80 +15,64 @@ import Checkbox from "@mui/material/Checkbox";
 import { FixedSizeList } from "react-window";
 
 // components
+import MainLayout from "layouts/main-layout";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import MDButton from "components/MDButton";
+import LineChart from "components/LineChart";
 
 // actions
-import moment from "moment";
-import Image from "components/Image/image.component";
+import { selectCurrentUser } from "store/user/user.selector";
+import { getClients } from "store/trainer/trainer.action";
 
 // css
 import colors from "assets/theme-dark/base/colors";
 import MDInput from "components/MDInput";
+import DataTable from "components/DataTable";
 const { background } = colors;
 
-const ClientManagementPage = ({ user: { currentUser, loading } }) => {
-  const [checked, setChecked] = useState([0]);
+// name: "Hanny Baniard",
+// fitnessLevel: "Data Coordiator",
+// gender: "Male",
+// lastVisited: 42
 
-  const handleToggle = (value) => () => {
-    const currentIndex = checked.indexOf(value);
-    const newChecked = [...checked];
+const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
+  const user = useSelector(selectCurrentUser);
+  const [clientTableData, setClientTableData] = useState([]);
+  const [selectedClient, setSelectedClient] = useState(null);
 
-    if (currentIndex === -1) {
-      newChecked.push(value);
-    } else {
-      newChecked.splice(currentIndex, 1);
-    }
+  useEffect(() => {
+    getClients(user?.id);
+  }, [getClients, user?.id]);
 
-    setChecked(newChecked);
+  const buildData = () => {
+    let data = [];
+
+    clients?.map((client) => {
+      data.push({
+        name: client.firstname + " " + client.lastname,
+        fitnessLevel: client.fitnessLevel,
+        gender: client.sex,
+        lastVisited: moment(client.lastVisited).format("MM-DD-YYYY")
+      });
+    });
+    setClientTableData(data);
   };
 
-  // Search input value state
-  const [search, setSearch] = useState("");
+  useEffect(() => {
+    buildData();
+  }, []);
 
-  // Search input state handle
-  // const onSearchChange = useAsyncDebounce((value) => {
-  //   //setGlobalFilter(value || undefined);
-  // }, 100);
+  useEffect(() => {
+    if (clients.length > 0) {
+      setSelectedClient(clients[5]);
+    }
+  }, []);
 
-  function renderRow(props) {
-    const { index, style } = props;
-
-    return (
-      <ListItem
-        style={style}
-        key={index}
-        component="div"
-        secondaryAction={
-          <Checkbox
-            edge="end"
-            onChange={handleToggle(index)}
-            checked={checked.indexOf(index) !== -1}
-            inputProps={{ "aria-labelledby": index }}
-            sx={{ paddingRight: "2rem" }}
-          />
-        }
-        disablePadding
-        sx={{
-          overflowY: "auto !important",
-          overflowX: "hidden !important",
-          scrollbarColor: `black grey !important`,
-          scrollbarWdth: "thin !important"
-        }}
-      >
-        <ListItemButton>
-          <ListItemAvatar>
-            <Avatar
-              alt={`Avatar n° `}
-              src={require(`assets/images/avatar/default-pic.png`)}
-            />
-          </ListItemAvatar>
-          <MDTypography variant="h6">Client Name1</MDTypography>
-        </ListItemButton>
-      </ListItem>
-    );
-  }
+  const handleClientClick = (data) => {
+    console.log("clicked");
+    //setSelectedClient(clients[0]);
+  };
 
   return (
     <MainLayout pageTitle="Trainer Dashboard">
@@ -106,10 +90,9 @@ const ClientManagementPage = ({ user: { currentUser, loading } }) => {
           width="100%"
           maxWidth="1400px"
         >
-          {/* Left Panel */}
           <MDBox
-            width="30%"
             px={1}
+            width="100%"
             display="flex"
             justifyContent="center"
             alignItems="center"
@@ -117,51 +100,189 @@ const ClientManagementPage = ({ user: { currentUser, loading } }) => {
           >
             <Avatar
               alt="Remy Sharp"
-              src={require("assets/images/me/me-and-isaiah.jpg")}
-              sx={{ width: "100%", height: "20rem" }}
+              src={require("assets/images/me/gym-1.jpg")}
+              sx={{ width: "25%", height: "20rem" }}
             />
             <MDTypography variant="h4" fontWeight="medium" mt={2}>
-              Client Name1
+              {selectedClient?.firstname + " " + selectedClient?.lastname}
             </MDTypography>
             <MDBox
               display="flex"
-              justifyContent="flex-start"
-              alignItems="flex-start"
+              justifyContent="center"
+              alignItems="center"
               flexDirection="column"
               width="100%"
+              mt={2}
             >
-              <MDTypography variant="h5" fontWeight="medium">
-                General
-              </MDTypography>
-              <MDBox ml={1} mb={1}>
-                <MDTypography variant="h6">Email: </MDTypography>
-                <MDTypography variant="h6">Phone Number: </MDTypography>
-                <MDTypography variant="h6">DOB: </MDTypography>
-                <MDTypography variant="h6">Gender: </MDTypography>
-              </MDBox>
-              <MDTypography variant="h5" fontWeight="medium">
-                Health Information
-              </MDTypography>
-              <MDBox ml={1} mb={1}>
-                <MDTypography variant="h6">Height: </MDTypography>
-                <MDTypography variant="h6">Weight: </MDTypography>
-                <MDTypography variant="h6">Fitness Level: </MDTypography>
-                <MDTypography variant="h6">Fitness Goals: </MDTypography>
-                <MDTypography variant="h6">Medical Conditions: </MDTypography>
-              </MDBox>
-              <MDTypography variant="h5" fontWeight="medium">
-                Weight History
-              </MDTypography>
-              <MDBox ml={1}>
-                <MDTypography variant="h6">Graph here... </MDTypography>
+              <Card sx={{ minWidth: "100%" }}>
+                <CardContent>
+                  <MDBox
+                    display="flex"
+                    justifyContent="space-between"
+                    width="100%"
+                    mt={2}
+                  >
+                    <MDBox
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      width="100%"
+                      ml={15}
+                    >
+                      <MDTypography variant="h5">Email:</MDTypography>
+                      <MDTypography color="info" variant="body2">
+                        {selectedClient?.email ? selectedClient.email : "N/A"}
+                      </MDTypography>
+                    </MDBox>
+
+                    <MDBox
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      width="100%"
+                    >
+                      <MDTypography variant="h5">Phone Number</MDTypography>
+                      <MDTypography color="info" variant="body2">
+                        {selectedClient?.phoneNumber
+                          ? selectedClient.phoneNumber
+                          : "N/A"}
+                      </MDTypography>
+                    </MDBox>
+                    <MDBox
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      width="100%"
+                    >
+                      <MDTypography variant="h5">DOB</MDTypography>
+                      <MDTypography color="info" variant="body2">
+                        {selectedClient?.dateOfBirth
+                          ? moment(selectedClient.dateOfBirth).format(
+                              "MM/DD/YYYY"
+                            )
+                          : "N/A"}
+                      </MDTypography>
+                    </MDBox>
+                    <MDBox
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      width="100%"
+                    >
+                      <MDTypography variant="h5">Height</MDTypography>
+                      <MDTypography color="info" variant="body2">
+                        {selectedClient?.height
+                          ? `${selectedClient.height}"`
+                          : "N/A"}
+                      </MDTypography>
+                    </MDBox>
+                  </MDBox>
+
+                  <MDBox
+                    mt={2}
+                    display="flex"
+                    justifyContent="space-between"
+                    width="100%"
+                  >
+                    <MDBox
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      width="100%"
+                      ml={15}
+                    >
+                      <MDTypography variant="h5">Weight</MDTypography>
+                      <MDTypography color="info" variant="body2">
+                        {selectedClient?.weight
+                          ? `${selectedClient.weight} lbs`
+                          : "N/A"}
+                      </MDTypography>
+                    </MDBox>
+                    <MDBox
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      width="100%"
+                    >
+                      <MDTypography variant="h5">Weight Goal</MDTypography>
+                      <MDTypography color="info" variant="body2">
+                        {selectedClient?.weightGoal
+                          ? `${selectedClient?.weightGoal} lbs`
+                          : "N/A"}
+                      </MDTypography>
+                    </MDBox>
+
+                    <MDBox
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      width="100%"
+                    >
+                      <MDTypography variant="h5">Fitness Level</MDTypography>
+                      <MDTypography color="info" variant="body2">
+                        {selectedClient?.fitnessLevel
+                          ? selectedClient.fitnessLevel
+                          : "N/A"}
+                      </MDTypography>
+                    </MDBox>
+                    <MDBox
+                      display="flex"
+                      flexDirection="column"
+                      justifyContent="flex-start"
+                      width="100%"
+                    >
+                      <MDTypography variant="h5">Fitness Goals</MDTypography>
+                      <MDTypography color="info" variant="body2">
+                        {selectedClient?.fitnessGoals
+                          ? selectedClient.fitnessGoals
+                          : "N/A"}
+                      </MDTypography>
+                    </MDBox>
+                  </MDBox>
+                </CardContent>
+              </Card>
+              <MDBox mt={8} width="100%">
+                <MDTypography variant="h5" fontWeight="medium">
+                  Weight History
+                </MDTypography>
+                <MDBox ml={1} mt={2}>
+                  <LineChart
+                    icon={{ color: "info", component: "fitness_center" }}
+                    title="Current: 220 lbs"
+                    description="Goal: 215 lbs"
+                    chart={{
+                      labels: [
+                        "Apr",
+                        "May",
+                        "Jun",
+                        "Jul",
+                        "Aug",
+                        "Sep",
+                        "Oct",
+                        "Nov",
+                        "Dec"
+                      ],
+                      datasets: [
+                        {
+                          label: "Current",
+                          color: "info",
+                          data: [240, 238, 236, 234, 237, 233, 225, 222, 220]
+                        },
+                        {
+                          label: "Goal",
+                          color: "success",
+                          data: [215, 215, 215, 215, 215, 215, 215, 215, 215]
+                        }
+                      ]
+                    }}
+                  />
+                </MDBox>
               </MDBox>
             </MDBox>
-          </MDBox>
-
-          {/* Right Panel */}
-          <MDBox width="70%" px={1}>
             {/* Client List */}
             <MDBox
+              mt={8}
+              width="100%"
               display="flex"
               justifyContent="center"
               alignItems="flex-start"
@@ -172,29 +293,35 @@ const ClientManagementPage = ({ user: { currentUser, loading } }) => {
               }}
             >
               <MDBox display="flex" justifyContent="space-between" width="100%">
-                <MDTypography variant="h4" fontWeight="medium">
-                  Client list
+                <MDTypography variant="h5" fontWeight="medium">
+                  Clients
                 </MDTypography>
-                <MDInput
-                  placeholder="Search..."
-                  value={search}
-                  size="small"
-                  onChange={({ currentTarget }) => {
-                    setSearch(search);
-                    //onSearchChange(currentTarget.value);
-                  }}
-                  sx={{ marginBottom: ".5rem" }}
-                />
               </MDBox>
-              <FixedSizeList
-                height={600}
-                width={"100%"}
-                itemSize={60}
-                itemCount={200}
-                style={{ border: `1px solid ${background.border}` }}
-              >
-                {renderRow}
-              </FixedSizeList>
+              {clients.length > 0 ? (
+                <DataTable
+                  canSearch
+                  handleClientClick={handleClientClick}
+                  table={{
+                    columns: [
+                      { Header: "name", accessor: "name", width: "40%" },
+                      {
+                        Header: "fitness level",
+                        accessor: "fitnessLevel",
+                        width: "25%"
+                      },
+                      { Header: "gender", accessor: "gender" },
+                      {
+                        Header: "last visited",
+                        accessor: "lastVisited",
+                        width: "12%"
+                      }
+                    ],
+                    rows: clientTableData
+                  }}
+                />
+              ) : (
+                <MDTypography variant="h6">No Clients </MDTypography>
+              )}
             </MDBox>
           </MDBox>
         </MDBox>
@@ -203,43 +330,12 @@ const ClientManagementPage = ({ user: { currentUser, loading } }) => {
   );
 };
 ClientManagementPage.propTypes = {
-  user: PropTypes.object.isRequired
+  trainer: PropTypes.object.isRequired,
+  getClients: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  user: state.user
+  trainer: state.trainer
 });
 
-export default connect(mapStateToProps, {})(ClientManagementPage);
-
-//border: `1px solid ${background.border}`
-
-{
-  /* <ListItem
-sx={{ marginBottom: "1rem" }}
-key={value}
-secondaryAction={
-  <Checkbox
-    edge="end"
-    onChange={handleToggle(value)}
-    checked={checked.indexOf(value) !== -1}
-    inputProps={{ "aria-labelledby": labelId }}
-  />
-}
-disablePadding
->
-<ListItemButton>
-  <ListItemAvatar>
-    <Avatar
-      alt={`Avatar n°${value + 1}`}
-      src={`/static/images/avatar/${value + 1}.jpg`}
-    />
-  </ListItemAvatar>
-  <ListItemText
-    id={labelId}
-    primary={`Line item ${value + 1}`}
-    sx={{ color: "text.main" }}
-  />
-</ListItemButton>
-</ListItem> */
-}
+export default connect(mapStateToProps, { getClients })(ClientManagementPage);

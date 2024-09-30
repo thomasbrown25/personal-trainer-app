@@ -12,17 +12,6 @@ import MDTypography from "components/MDTypography";
 import { selectCurrentUser } from "store/user/user.selector";
 import { getClients } from "store/trainer/trainer.action";
 
-const clientData = [
-  { name: "Osiris Simmons", lastViewed: "5 hours ago" },
-  { name: "Saylor Quintero", lastViewed: "5 hours ago" },
-  { name: "Zachariah Hartman", lastViewed: "3 days ago" },
-  { name: "Marley Crosby", lastViewed: "2 weeks ago" },
-  { name: "Jensen Greer", lastViewed: "2 weeks ago" },
-  { name: "Ace Neal", lastViewed: "2 weeks ago" },
-  { name: "Felix Delacruz", lastViewed: "1 month ago" },
-  { name: "Dangelo Nielsen", lastViewed: "1 month ago" }
-];
-
 const ClientPreview = ({ trainer: { clients }, getClients }) => {
   const user = useSelector(selectCurrentUser);
 
@@ -85,7 +74,10 @@ const ClientPreview = ({ trainer: { clients }, getClients }) => {
                 component={Link}
                 to="/client-profile"
                 color="info"
-                sx={{ "&:hover": { textDecoration: "underline !important" } }}
+                sx={{
+                  "&:hover": { textDecoration: "underline !important" },
+                  cursor: "pointer"
+                }}
               >
                 {client.firstname} {client.lastname}
               </MDTypography>

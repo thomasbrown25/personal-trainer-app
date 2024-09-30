@@ -27,10 +27,6 @@ import colors from "assets/theme-dark/base/colors";
 
 // Images
 
-import MDAvatar from "components/MDAvatar";
-import logo from "assets/images/favicon.png";
-import DataTable from "components/DataTable";
-import ClientCard from "components/ClientCard/client-card.component";
 import Calendar from "components/Calendar/calendar.component";
 import WorkoutPreview from "../components/workouts/workout-preview.component";
 import ClientPreview from "../components/clients/client-preview.component";

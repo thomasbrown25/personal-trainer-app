@@ -13,7 +13,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useMemo, useEffect, useState } from "react";
+import { useMemo, useEffect, useState, useCallback } from "react";
 
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
@@ -34,6 +34,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import Icon from "@mui/material/Icon";
 import Autocomplete from "@mui/material/Autocomplete";
+import Checkbox from "@mui/material/Checkbox";
 
 // Material Dashboard 2 PRO React components
 import MDBox from "components/MDBox";
@@ -55,6 +56,11 @@ function DataTable({
   isSorted,
   noEndBorder
 }) {
+  const handleClientClick = (e) => {
+    console.log(e);
+    //setSelectedClient(clients[0]);
+  };
+
   const defaultValue = entriesPerPage.defaultValue
     ? entriesPerPage.defaultValue
     : 10;
@@ -220,19 +226,25 @@ function DataTable({
             </TableRow>
           ))}
         </MDBox>
+
         <TableBody {...getTableBodyProps()}>
           {page.map((row, key) => {
             prepareRow(row);
             return (
-              <TableRow {...row.getRowProps()}>
+              <TableRow {...row.getRowProps()} key={key}>
                 {row.cells.map((cell) => (
-                  <DataTableBodyCell
-                    noBorder={noEndBorder && rows.length - 1 === key}
-                    align={cell.column.align ? cell.column.align : "left"}
-                    {...cell.getCellProps()}
-                  >
-                    {cell.render("Cell")}
-                  </DataTableBodyCell>
+                  <>
+                    {console.log(cell.column)}
+                    <DataTableBodyCell
+                      noBorder={noEndBorder && rows.length - 1 === key}
+                      align={cell.column.align ? cell.column.align : "left"}
+                      selectable={cell.column.Header === "name" ? true : false}
+                      {...cell.getCellProps()}
+                      handleOnClick={handleClientClick}
+                    >
+                      {cell.render("Cell")}
+                    </DataTableBodyCell>
+                  </>
                 ))}
               </TableRow>
             );
@@ -299,6 +311,7 @@ function DataTable({
 DataTable.defaultProps = {
   entriesPerPage: { defaultValue: 10, entries: [5, 10, 15, 20, 25] },
   canSearch: false,
+  canSelect: false,
   canPagination: true,
   showTotalEntries: true,
   pagination: { variant: "gradient", color: "info" },

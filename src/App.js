@@ -158,7 +158,10 @@ export default function App() {
           />
           <Route path="/trainer-profile" element={<TrainerProfilePage />} />
           <Route path="/trainer-settings" element={<TrainerSettingsPage />} />
-          <Route path="/trainer-test" element={<ClientManagementPage />} />
+          <Route
+            path="/trainer-client-management"
+            element={<ClientManagementPage />}
+          />
           <Route path="/add-new-client" element={<AddNewClientPage />} />
           <Route path="*" element={<Navigate to="/trainer-dashboard" />} />
         </Route>
