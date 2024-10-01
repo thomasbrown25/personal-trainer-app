@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import MainLayout from "layouts/main-layout";
 
 // Mui components
-import { Grid, Card, Avatar } from "@mui/material";
+import { Grid, Card, Avatar, Icon } from "@mui/material";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
@@ -25,11 +25,14 @@ import Image from "components/Image/image.component";
 // css
 import colors from "assets/theme-dark/base/colors";
 import styled from "@emotion/styled";
+import BasicInfo from "pages/trainer/components/basic-info-form/basic-info-form.component.jsx";
 const { background } = colors;
 
 const AddNewClientPage = ({ user: { currentUser, loading } }) => {
+  const handleSubmit = () => {};
   return (
     <MainLayout pageTitle="Trainer Dashboard">
+      <MDTypography variant="h3">New Client Form</MDTypography>
       <MDBox
         width="100%"
         display="flex"
@@ -44,65 +47,42 @@ const AddNewClientPage = ({ user: { currentUser, loading } }) => {
           width="100%"
           maxWidth="1400px"
         >
-          {/* Left Panel */}
-          <MDBox width="30%" px={1}>
-            <Avatar
-              alt="Remy Sharp"
-              src={require("assets/images/me/me-and-isaiah.jpg")}
-              sx={{ width: "100%", height: "20rem" }}
-            />
-            <MDBox mt={2}>
-              <Link to="/">
-                <MDButton variant="outlined" fullWidth>
-                  Edit profile
-                </MDButton>
-              </Link>
-            </MDBox>
-            <MDBox mt={2}>
-              <Link to="/add-new-client">
-                <MDButton variant="outlined" fullWidth>
-                  Add new client
-                </MDButton>
-              </Link>
-            </MDBox>
-          </MDBox>
-
-          {/* Right Panel */}
-          <MDBox width="70%" px={1}>
-            {/* Trainer Videos */}
-            <MDBox display="flex" justifyContent="space-between">
-              <MDTypography variant="h6" fontWeight="medium">
-                New Client Form
-              </MDTypography>
-              <MDTypography variant="h6" fontWeight="medium">
-                You have 254 clients
-              </MDTypography>
+          <MDBox width="100%" px={1}>
+            <MDBox
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column"
+              width="100%"
+            >
+              <Avatar
+                alt="Remy Sharp"
+                src={require("assets/images/default-profile-pic.png")}
+                sx={{ width: "300px", height: "17rem" }}
+              />
+              <MDBox
+                width="100%"
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Icon fontSize="large" sx={{ cursor: "pointer" }}>
+                  add_a_photo
+                </Icon>
+                <MDTypography variant="h5" ml={1} pt={1}>
+                  Add photo
+                </MDTypography>
+              </MDBox>
             </MDBox>
 
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <MDBox display="flex" justifyContent="space-between" mt={4}>
-                  <MDTypography variant="h6" fontWeight="light">
-                    Recent activity
-                  </MDTypography>
-                </MDBox>
-              </Grid>
-              <Grid item xs={12}>
-                <MDBox display="flex" justifyContent="flex-start">
-                  <Card sx={{ width: "100%" }}>
-                    <MDBox display="flex" flexDirection="column" p={2}>
-                      <MDBox>
-                        <MDTypography variant="h6" fontWeight="regular">
-                          - activity 1
-                        </MDTypography>
-                        <MDTypography variant="h6">- activity 2</MDTypography>
-                        <MDTypography variant="h6">- activity 3</MDTypography>
-                      </MDBox>
-                    </MDBox>
-                  </Card>
-                </MDBox>
-              </Grid>
-            </Grid>
+            <BasicInfo handleSubmit={handleSubmit} />
+            <MDBox display="flex" justifyContent="center" mt={5}>
+              <MDBox width="300px">
+                <MDButton color="success" fullWidth>
+                  Save
+                </MDButton>
+              </MDBox>
+            </MDBox>
           </MDBox>
         </MDBox>
       </MDBox>

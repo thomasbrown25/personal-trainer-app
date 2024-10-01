@@ -66,7 +66,9 @@ function DashboardNavbar({ absolute, light, isMini, logout }) {
       onClose={handleProfileCloseMenu}
       sx={{ mt: 2 }}
     >
-      <NotificationItem icon={<Icon>person</Icon>} title="Profile" />
+      <Link to="/trainer-settings">
+        <NotificationItem icon={<Icon>person</Icon>} title="Profile" />
+      </Link>
       <NotificationItem icon={<Icon>note</Icon>} title="Notifications" />
       <NotificationItem
         icon={<Icon>logout</Icon>}

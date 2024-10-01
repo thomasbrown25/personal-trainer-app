@@ -5,20 +5,12 @@ import PropTypes from "prop-types";
 import moment from "moment";
 
 // Mui components
-import { Grid, Card, Divider, Avatar, CardContent } from "@mui/material";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import Checkbox from "@mui/material/Checkbox";
-import { FixedSizeList } from "react-window";
+import { Card, Avatar, CardContent } from "@mui/material";
 
 // components
 import MainLayout from "layouts/main-layout";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
 import LineChart from "components/LineChart";
 
 // actions
@@ -27,14 +19,9 @@ import { getClients } from "store/trainer/trainer.action";
 
 // css
 import colors from "assets/theme-dark/base/colors";
-import MDInput from "components/MDInput";
 import DataTable from "components/DataTable";
+import MDButton from "components/MDButton";
 const { background } = colors;
-
-// name: "Hanny Baniard",
-// fitnessLevel: "Data Coordiator",
-// gender: "Male",
-// lastVisited: 42
 
 const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
   const user = useSelector(selectCurrentUser);
@@ -98,6 +85,13 @@ const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
             alignItems="center"
             flexDirection="column"
           >
+            <MDBox width="100%" display="flex" justifyContent="flex-end">
+              <Link to="/add-new-client">
+                <MDButton variant="outlined" color="info">
+                  Add Client
+                </MDButton>
+              </Link>
+            </MDBox>
             <Avatar
               alt="Remy Sharp"
               src={require("assets/images/me/gym-1.jpg")}
@@ -154,7 +148,7 @@ const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
                       justifyContent="flex-start"
                       width="100%"
                     >
-                      <MDTypography variant="h5">DOB</MDTypography>
+                      <MDTypography variant="h5">Date of Birth</MDTypography>
                       <MDTypography color="info" variant="body2">
                         {selectedClient?.dateOfBirth
                           ? moment(selectedClient.dateOfBirth).format(
