@@ -52,7 +52,7 @@ const UserAvatar = () => {
           </MDTypography>
         </MDBox>
       </MDBox>
-      <Link to="/trainer-profile" style={{ width: "100%" }}>
+      <Link to="/trainer/profile" style={{ width: "100%" }}>
         <MDButton
           variant="outlined"
           size="small"

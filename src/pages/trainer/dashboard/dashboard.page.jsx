@@ -28,8 +28,8 @@ import colors from "assets/theme-dark/base/colors";
 // Images
 
 import Calendar from "components/Calendar/calendar.component";
-import WorkoutPreview from "../components/workouts/workout-preview.component";
-import ClientPreview from "../components/clients/client-preview.component";
+import WorkoutPreview from "../workout-management/workout-preview.component";
+import ClientPreview from "../client-management/client-preview.component";
 
 const { background } = colors;
 

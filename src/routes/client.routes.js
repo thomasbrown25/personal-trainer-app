@@ -6,7 +6,7 @@ const clientRoutes = [
     type: "collapse",
     name: "Dashboard",
     key: "dashboard",
-    route: "/client-dashboard",
+    route: "/client/dashboard",
     icon: <Icon fontSize="medium">dashboard</Icon>,
     noCollapse: true
   },

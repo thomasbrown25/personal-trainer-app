@@ -54,13 +54,9 @@ function DataTable({
   table,
   pagination,
   isSorted,
-  noEndBorder
+  noEndBorder,
+  handleClientClick
 }) {
-  const handleClientClick = (e) => {
-    console.log(e);
-    //setSelectedClient(clients[0]);
-  };
-
   const defaultValue = entriesPerPage.defaultValue
     ? entriesPerPage.defaultValue
     : 10;
@@ -209,10 +205,11 @@ function DataTable({
       ) : null}
       <Table {...getTableProps()}>
         <MDBox component="thead">
-          {headerGroups.map((headerGroup) => (
+          {headerGroups.map((headerGroup, i) => (
             <TableRow {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map((column) => (
                 <DataTableHeadCell
+                  key={i}
                   {...column.getHeaderProps(
                     isSorted && column.getSortByToggleProps()
                   )}
@@ -232,15 +229,15 @@ function DataTable({
             prepareRow(row);
             return (
               <TableRow {...row.getRowProps()} key={key}>
-                {row.cells.map((cell) => (
+                {row.cells.map((cell, i) => (
                   <>
-                    {console.log(cell.column)}
                     <DataTableBodyCell
+                      key={i}
                       noBorder={noEndBorder && rows.length - 1 === key}
                       align={cell.column.align ? cell.column.align : "left"}
                       selectable={cell.column.Header === "name" ? true : false}
                       {...cell.getCellProps()}
-                      handleOnClick={handleClientClick}
+                      handleOnClick={() => handleClientClick(cell.row.id)}
                     >
                       {cell.render("Cell")}
                     </DataTableBodyCell>

@@ -49,7 +49,8 @@ import TrainerRoutes from "utils/private-routing/trainer-route";
 import ClientRoutes from "utils/private-routing/client-route";
 
 import ClientManagementPage from "pages/trainer/client-management/client-management.page";
-import AddNewClientPage from "pages/trainer/add-new-client/add-new-client.page";
+import AddNewClientPage from "pages/trainer/client-management/add-new-client.page";
+import WorkoutManagementPage from "pages/trainer/workout-management/workout-management.page";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -90,36 +91,43 @@ export default function App() {
         <Route element={<AdminRoutes />}>
           <Route
             index
-            path="/admin-dashboard"
+            path="/admin/dashboard"
             element={<AdminDashboardPage />}
           />
-          <Route path="/admin-profile" element={<AdminProfilePage />} />
-          <Route path="*" element={<Navigate to="/admin-dashboard" />} />
+          <Route path="/admin/profile" element={<AdminProfilePage />} />
+          <Route path="*" element={<Navigate to="/admin/dashboard" />} />
         </Route>
 
         <Route element={<TrainerRoutes />}>
           <Route
             index
-            path="/trainer-dashboard"
+            path="/trainer/dashboard"
             element={<TrainerDashboardPage />}
           />
-          <Route path="/trainer-profile" element={<TrainerProfilePage />} />
+          <Route path="/trainer/profile" element={<TrainerProfilePage />} />
           <Route
-            path="/trainer-client-management"
+            path="/trainer/client-management"
             element={<ClientManagementPage />}
           />
-          <Route path="/add-new-client" element={<AddNewClientPage />} />
-          <Route path="*" element={<Navigate to="/trainer-dashboard" />} />
+          <Route
+            path="/trainer/workout-management"
+            element={<WorkoutManagementPage />}
+          />
+          <Route
+            path="/trainer/add-new-client"
+            element={<AddNewClientPage />}
+          />
+          <Route path="*" element={<Navigate to="/trainer/dashboard" />} />
         </Route>
 
         <Route element={<ClientRoutes />}>
           <Route
             index
-            path="/client-dashboard"
+            path="/client/dashboard"
             element={<ClientDashboardPage />}
           />
-          <Route path="/client-profile" element={<ClientProfilePage />} />
-          <Route path="*" element={<Navigate to="/client-dashboard" />} />
+          <Route path="/client/profile" element={<ClientProfilePage />} />
+          <Route path="*" element={<Navigate to="/client/dashboard" />} />
         </Route>
       </Routes>
     </ThemeProvider>

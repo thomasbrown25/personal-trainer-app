@@ -6,7 +6,7 @@ const trainerRoutes = [
     type: "collapse",
     name: "Dashboard",
     key: "dashboard",
-    route: "/trainer-dashboard",
+    route: "/trainer/dashboard",
     icon: <Icon fontSize="medium">dashboard</Icon>,
     noCollapse: true
   },

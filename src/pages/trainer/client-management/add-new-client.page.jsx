@@ -26,6 +26,7 @@ import Image from "components/Image/image.component";
 import colors from "assets/theme-dark/base/colors";
 import styled from "@emotion/styled";
 import BasicInfo from "pages/trainer/components/basic-info-form/basic-info-form.component.jsx";
+import FormField from "../components/basic-info-form/form-field.component";
 const { background } = colors;
 
 const AddNewClientPage = ({ user: { currentUser, loading } }) => {
@@ -33,6 +34,10 @@ const AddNewClientPage = ({ user: { currentUser, loading } }) => {
   return (
     <MainLayout pageTitle="Trainer Dashboard">
       <MDTypography variant="h3">New Client Form</MDTypography>
+      <MDTypography variant="h5" mt={5} pt={1} sx={{ textAlign: "center" }}>
+        Add a user or send them the invite link and they can sign up themselves.
+      </MDTypography>
+
       <MDBox
         width="100%"
         display="flex"
@@ -47,42 +52,28 @@ const AddNewClientPage = ({ user: { currentUser, loading } }) => {
           width="100%"
           maxWidth="1400px"
         >
-          <MDBox width="100%" px={1}>
-            <MDBox
-              display="flex"
-              justifyContent="center"
-              alignItems="center"
-              flexDirection="column"
-              width="100%"
-            >
-              <Avatar
-                alt="Remy Sharp"
-                src={require("assets/images/default-profile-pic.png")}
-                sx={{ width: "300px", height: "17rem" }}
-              />
-              <MDBox
-                width="100%"
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Icon fontSize="large" sx={{ cursor: "pointer" }}>
-                  add_a_photo
-                </Icon>
-                <MDTypography variant="h5" ml={1} pt={1}>
-                  Add photo
-                </MDTypography>
-              </MDBox>
+          <Card id="basic-info" sx={{ overflow: "visible", width: "100%" }}>
+            <MDBox p={3}>
+              <MDTypography variant="h5">Send invite</MDTypography>
             </MDBox>
-
-            <BasicInfo handleSubmit={handleSubmit} />
-            <MDBox display="flex" justifyContent="center" mt={5}>
+            <MDBox component="form" pb={3} px={3}>
+              <FormField
+                label="Email"
+                placeholder="example@email.com"
+                inputProps={{ type: "email" }}
+              />
+            </MDBox>
+            <MDBox display="flex" justifyContent="center" mb={3}>
               <MDBox width="300px">
                 <MDButton color="success" fullWidth>
-                  Save
+                  Send Invite
                 </MDButton>
               </MDBox>
             </MDBox>
+          </Card>
+
+          <MDBox width="100%">
+            <BasicInfo handleSubmit={handleSubmit} />
           </MDBox>
         </MDBox>
       </MDBox>

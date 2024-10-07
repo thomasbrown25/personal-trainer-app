@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import moment from "moment";
 
 // Mui components
-import { Card, Avatar, CardContent } from "@mui/material";
+import { Card, Avatar, CardContent, Icon } from "@mui/material";
 
 // components
 import MainLayout from "layouts/main-layout";
@@ -37,6 +37,7 @@ const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
 
     clients?.map((client) => {
       data.push({
+        id: client.id,
         name: client.firstname + " " + client.lastname,
         fitnessLevel: client.fitnessLevel,
         gender: client.sex,
@@ -56,9 +57,8 @@ const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
     }
   }, []);
 
-  const handleClientClick = (data) => {
-    console.log("clicked");
-    //setSelectedClient(clients[0]);
+  const handleClientClick = (id) => {
+    setSelectedClient(clients[id]);
   };
 
   return (
@@ -85,13 +85,6 @@ const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
             alignItems="center"
             flexDirection="column"
           >
-            <MDBox width="100%" display="flex" justifyContent="flex-end">
-              <Link to="/add-new-client">
-                <MDButton variant="outlined" color="info">
-                  Add Client
-                </MDButton>
-              </Link>
-            </MDBox>
             <Avatar
               alt="Remy Sharp"
               src={require("assets/images/me/gym-1.jpg")}
@@ -100,6 +93,19 @@ const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
             <MDTypography variant="h4" fontWeight="medium" mt={2}>
               {selectedClient?.firstname + " " + selectedClient?.lastname}
             </MDTypography>
+            <MDBox width="100%" display="flex" justifyContent="flex-end">
+              <Icon color="info">people</Icon>
+              <MDTypography
+                variant="button"
+                color="info"
+                component={Link}
+                to="/trainer/trainer/add-new-client"
+                sx={{ "&:hover": { textDecoration: "underline !important" } }}
+                ml={1}
+              >
+                Add Client
+              </MDTypography>
+            </MDBox>
             <MDBox
               display="flex"
               justifyContent="center"

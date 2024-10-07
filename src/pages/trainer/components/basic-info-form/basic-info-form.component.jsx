@@ -11,6 +11,7 @@ import MDTypography from "components/MDTypography";
 import FormField from "pages/trainer/components/basic-info-form/form-field.component";
 // Data
 import selectData from "./selectData";
+import MDButton from "components/MDButton";
 
 const BasicInfo = () => {
   const [formData, setFormData] = useState(null);
@@ -22,7 +23,7 @@ const BasicInfo = () => {
     <MDBox mt={5}>
       <Card id="basic-info" sx={{ overflow: "visible" }}>
         <MDBox p={3}>
-          <MDTypography variant="h5">Client Info</MDTypography>
+          <MDTypography variant="h5">Add your client manually</MDTypography>
         </MDBox>
         <MDBox component="form" pb={3} px={3}>
           <Grid container spacing={3}>
@@ -167,6 +168,13 @@ const BasicInfo = () => {
               />
             </Grid>
           </Grid>
+        </MDBox>
+        <MDBox display="flex" justifyContent="center" mb={3}>
+          <MDBox width="300px">
+            <MDButton color="success" fullWidth>
+              Add Client
+            </MDButton>
+          </MDBox>
         </MDBox>
       </Card>
     </MDBox>

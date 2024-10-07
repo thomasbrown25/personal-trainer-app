@@ -35,7 +35,7 @@ const ClientPreview = ({ trainer: { clients }, getClients }) => {
           variant="button"
           color="info"
           component={Link}
-          to="/trainer-client-management"
+          to="/trainer/client-management"
           sx={{ "&:hover": { textDecoration: "underline !important" } }}
         >
           Manage your clients
@@ -72,7 +72,7 @@ const ClientPreview = ({ trainer: { clients }, getClients }) => {
                 display="flex"
                 py={0.5}
                 component={Link}
-                to="/client-profile"
+                to="/client/profile"
                 color="info"
                 sx={{
                   "&:hover": { textDecoration: "underline !important" },

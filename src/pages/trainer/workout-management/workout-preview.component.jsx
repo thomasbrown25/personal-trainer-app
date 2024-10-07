@@ -24,7 +24,7 @@ const WorkoutPreview = () => {
           variant="button"
           color="info"
           component={Link}
-          to="/trainer-workout-management"
+          to="/trainer/workout-management"
           sx={{ "&:hover": { textDecoration: "underline !important" } }}
         >
           Manage your plans
