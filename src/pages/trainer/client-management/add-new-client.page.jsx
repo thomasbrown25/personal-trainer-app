@@ -34,7 +34,7 @@ const AddNewClientPage = ({ user: { currentUser, loading } }) => {
   return (
     <MainLayout pageTitle="Trainer Dashboard">
       <MDTypography variant="h3">New Client Form</MDTypography>
-      <MDTypography variant="h5" mt={5} pt={1} sx={{ textAlign: "center" }}>
+      <MDTypography variant="h5" my={5} pt={1} sx={{ textAlign: "center" }}>
         Add a user or send them the invite link and they can sign up themselves.
       </MDTypography>
 

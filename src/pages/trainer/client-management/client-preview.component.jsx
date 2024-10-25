@@ -23,7 +23,7 @@ const ClientPreview = ({
   }, [getClientsLastVisited, user?.id]);
 
   return (
-    <MDBox sx={{ height: 400, width: "100%" }}>
+    <MDBox sx={{ height: 400, width: "100%" }} mb={13}>
       <MDBox
         pt={0}
         mb={2}

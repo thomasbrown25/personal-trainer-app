@@ -43,7 +43,6 @@ const TrainerDashboardPage = () => {
           <WorkoutPreview />
 
           <ClientPreview />
-
           <Calendar />
         </Grid>
       </Grid>

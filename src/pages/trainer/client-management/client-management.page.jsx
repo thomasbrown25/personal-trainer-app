@@ -53,7 +53,7 @@ const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
 
   useEffect(() => {
     if (clients.length > 0) {
-      setSelectedClient(clients[5]);
+      setSelectedClient(clients[0]);
     }
   }, []);
 
