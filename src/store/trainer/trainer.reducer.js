@@ -2,6 +2,7 @@ import { TRAINER_ACTION_TYPES } from "./trainer.types";
 
 const initialState = {
   clients: [],
+  clientsLastVisited: [],
   loading: true,
   error: null
 };
@@ -18,9 +19,32 @@ function userReducer(state = initialState, action) {
         error: null
       };
 
-    case TRAINER_ACTION_TYPES.GET_CLIENTS_FAILED:
+    case TRAINER_ACTION_TYPES.ADD_CLIENT_SUCCESS:
       return {
         ...state,
+        clients: [...state.clients, payload]
+      };
+
+    case TRAINER_ACTION_TYPES.GET_CLIENTS_FAILED:
+    case TRAINER_ACTION_TYPES.ADD_CLIENT_FAILED:
+      return {
+        ...state,
+        error: payload
+      };
+
+    case TRAINER_ACTION_TYPES.GET_CLIENTSLASTVISITED_SUCCESS:
+      return {
+        ...state,
+        clientsLastVisited: payload,
+        loading: false,
+        error: null
+      };
+
+    case TRAINER_ACTION_TYPES.GET_CLIENTSLASTVISITED_FAILED:
+      return {
+        ...state,
+        clientsLastVisited: [],
+        loading: false,
         error: payload
       };
 

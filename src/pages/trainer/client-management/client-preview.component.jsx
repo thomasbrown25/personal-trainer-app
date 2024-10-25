@@ -10,14 +10,17 @@ import MDTypography from "components/MDTypography";
 
 // actions
 import { selectCurrentUser } from "store/user/user.selector";
-import { getClients } from "store/trainer/trainer.action";
+import { getClientsLastVisited } from "store/trainer/trainer.action";
 
-const ClientPreview = ({ trainer: { clients }, getClients }) => {
+const ClientPreview = ({
+  trainer: { clientsLastVisited },
+  getClientsLastVisited
+}) => {
   const user = useSelector(selectCurrentUser);
 
   useEffect(() => {
-    getClients(user?.id);
-  }, [getClients, user?.id]);
+    getClientsLastVisited(user?.id);
+  }, [getClientsLastVisited, user?.id]);
 
   return (
     <MDBox sx={{ height: 400, width: "100%" }}>
@@ -57,8 +60,8 @@ const ClientPreview = ({ trainer: { clients }, getClients }) => {
       </MDBox>
 
       <MDBox>
-        {clients.length > 0 ? (
-          clients.map((client, i) => (
+        {clientsLastVisited.length > 0 ? (
+          clientsLastVisited.map((client, i) => (
             <MDBox
               key={i}
               display="flex"
@@ -101,11 +104,13 @@ const ClientPreview = ({ trainer: { clients }, getClients }) => {
 
 ClientPreview.propTypes = {
   trainer: PropTypes.object.isRequired,
-  getClients: PropTypes.func.isRequired
+  getClientsLastVisited: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
   trainer: state.trainer
 });
 
-export default connect(mapStateToProps, { getClients })(ClientPreview);
+export default connect(mapStateToProps, { getClientsLastVisited })(
+  ClientPreview
+);

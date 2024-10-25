@@ -20,3 +20,37 @@ export const getClients = (id) => async (dispatch) => {
     });
   }
 };
+
+export const addClient = (formData) => async (dispatch) => {
+  try {
+    const response = await api.post("/api/client/add-client", formData);
+
+    dispatch({
+      type: TRAINER_ACTION_TYPES.ADD_CLIENT_SUCCESS,
+      payload: response.data.data
+    });
+  } catch (error) {
+    console.log(error, error.message);
+    dispatch({
+      type: TRAINER_ACTION_TYPES.ADD_CLIENT_FAILED,
+      payload: error.message
+    });
+  }
+};
+
+export const getClientsLastVisited = (id) => async (dispatch) => {
+  try {
+    const response = await api.get(`/api/trainer/${id}/clients/last-visited`);
+
+    dispatch({
+      type: TRAINER_ACTION_TYPES.GET_CLIENTSLASTVISITED_SUCCESS,
+      payload: response.data.data
+    });
+  } catch (error) {
+    console.log(error, error.message);
+    dispatch({
+      type: TRAINER_ACTION_TYPES.GET_CLIENTSLASTVISITED_FAILED,
+      payload: error.message
+    });
+  }
+};

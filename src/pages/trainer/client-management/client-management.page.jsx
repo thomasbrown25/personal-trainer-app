@@ -93,13 +93,13 @@ const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
             <MDTypography variant="h4" fontWeight="medium" mt={2}>
               {selectedClient?.firstname + " " + selectedClient?.lastname}
             </MDTypography>
-            <MDBox width="100%" display="flex" justifyContent="flex-end">
+            <MDBox width="100%" display="flex" justifyContent="flex-start">
               <Icon color="info">people</Icon>
               <MDTypography
                 variant="button"
                 color="info"
                 component={Link}
-                to="/trainer/trainer/add-new-client"
+                to="/trainer/add-new-client"
                 sx={{ "&:hover": { textDecoration: "underline !important" } }}
                 ml={1}
               >
