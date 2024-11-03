@@ -9,3 +9,5 @@ export const selectIsLinkValid = (state) => state.user.isLinkValid;
 export const selectUser = (state) => state.user;
 
 export const selectUserRole = (state) => state.user.currentUser?.role;
+
+export const selectUserTrainer = (state) => state.user.currentUser?.trainer;

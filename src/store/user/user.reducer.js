@@ -1,7 +1,7 @@
 import { USER_ACTION_TYPES } from "./user.types";
 
 const initialState = {
-  currentUser: { clients: [] },
+  currentUser: null,
   settings: { darkMode: true, sidebarMini: false, activeColor: "blue" },
   isLinkValid: true,
   isAuthenticated: null,
@@ -19,16 +19,7 @@ function userReducer(state = initialState, action) {
         ...state,
         isAuthenticated: true,
         loading: false,
-        currentUser: {
-          ...state.currentUser,
-          id: payload.id,
-          firstname: payload.firstname,
-          lastname: payload.lastname,
-          email: payload.email,
-          phoneNumber: payload.phoneNumber,
-          role: payload.role,
-          clients: payload.clients
-        },
+        currentUser: payload,
         error: null
       };
 

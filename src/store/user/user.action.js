@@ -103,7 +103,7 @@ export const loadUser = () => async (dispatch) => {
   try {
     const response = await api.get("/api/user/load-user");
 
-    // console.log(response.data.data);
+    console.log(response.data.data);
 
     console.log("calling load user");
 

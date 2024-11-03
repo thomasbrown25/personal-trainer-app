@@ -10,14 +10,6 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { LineChart } from "@mui/x-charts/LineChart";
 
-// components
-import Header from "components/Header/header.component";
-import Footer from "layouts/footer";
-import MDBox from "components/MDBox";
-import MDTypography from "components/MDTypography";
-import MDButton from "components/MDButton";
-import Image from "components/Image/image.component";
-
 // actions
 import moment from "moment";
 import { selectCurrentUser } from "store/user/user.selector";

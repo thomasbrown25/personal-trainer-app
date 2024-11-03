@@ -35,6 +35,7 @@ const MainLayout = ({ children, pageTitle }) => {
             position: "relative",
             minHeight: "97vh",
             maxWidth: "1280px",
+            width: "100%",
 
             [breakpoints.up("xl")]: {
               //marginLeft: miniSidenav ? pxToRem(120) : pxToRem(274),

@@ -1,10 +1,8 @@
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { Grid } from "@mui/material";
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 
-const Header = ({ user: { currentUser }, title, subTitle }) => {
+const Header = ({ title, subTitle }) => {
   return (
     <Grid item xs={12} xl={12}>
       <MDBox
@@ -14,7 +12,7 @@ const Header = ({ user: { currentUser }, title, subTitle }) => {
         pt={3}
         px={2}
       >
-        <MDTypography variant="h5" fontWeight="medium">
+        <MDTypography variant="h4" fontWeight="medium">
           {title}
         </MDTypography>
         {subTitle && (
@@ -26,12 +24,6 @@ const Header = ({ user: { currentUser }, title, subTitle }) => {
     </Grid>
   );
 };
-Header.propTypes = {
-  user: PropTypes.object.isRequired
-  // refresh: PropTypes.object.isRequired
-};
-const mapStateToProps = (state) => ({
-  user: state.user,
-  refresh: state.refresh
-});
-export default connect(mapStateToProps, {})(Header);
+Header.propTypes = {};
+
+export default Header;
