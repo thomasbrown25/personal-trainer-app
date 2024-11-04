@@ -7,7 +7,6 @@ const MDLink = ({ children, to }) => {
       variant="h6"
       fontWeight="regular"
       display="flex"
-      mt={2}
       component={Link}
       to={to}
       color="info"
