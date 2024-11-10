@@ -21,6 +21,7 @@ import { getClients } from "store/trainer/trainer.action";
 import colors from "assets/theme-dark/base/colors";
 import DataTable from "components/DataTable";
 import MDButton from "components/MDButton";
+import UserCard from "./user-card";
 const { background } = colors;
 
 const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
@@ -114,138 +115,33 @@ const ClientManagementPage = ({ trainer: { clients }, getClients }) => {
               width="100%"
               mt={2}
             >
-              <Card sx={{ minWidth: "100%" }}>
-                <CardContent>
+              <MDBox display="flex" width="100%">
+                <UserCard user={selectedClient} />
+                <Card sx={{ ml: 2, width: "100%" }}>
                   <MDBox
                     display="flex"
-                    justifyContent="space-between"
-                    width="100%"
-                    mt={2}
+                    flexDirection="column"
+                    alignItems="center"
+                    justifyContent="center"
+                    height="100%"
                   >
-                    <MDBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      width="100%"
-                      ml={15}
+                    <MDTypography mb={2}>Custom plan</MDTypography>
+                    <Link
+                      to={`/trainer/client-management/edit-workout-plan/${selectedClient?.id}`}
                     >
-                      <MDTypography variant="h5">Email:</MDTypography>
-                      <MDTypography color="info" variant="body2">
-                        {selectedClient?.email ? selectedClient.email : "N/A"}
-                      </MDTypography>
-                    </MDBox>
-
-                    <MDBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      width="100%"
-                    >
-                      <MDTypography variant="h5">Phone Number</MDTypography>
-                      <MDTypography color="info" variant="body2">
-                        {selectedClient?.phoneNumber
-                          ? selectedClient.phoneNumber
-                          : "N/A"}
-                      </MDTypography>
-                    </MDBox>
-                    <MDBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      width="100%"
-                    >
-                      <MDTypography variant="h5">Date of Birth</MDTypography>
-                      <MDTypography color="info" variant="body2">
-                        {selectedClient?.dateOfBirth
-                          ? moment(selectedClient.dateOfBirth).format(
-                              "MM/DD/YYYY"
-                            )
-                          : "N/A"}
-                      </MDTypography>
-                    </MDBox>
-                    <MDBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      width="100%"
-                    >
-                      <MDTypography variant="h5">Height</MDTypography>
-                      <MDTypography color="info" variant="body2">
-                        {selectedClient?.height
-                          ? `${selectedClient.height}"`
-                          : "N/A"}
-                      </MDTypography>
-                    </MDBox>
+                      <MDButton variant="outlined" color="info">
+                        Edit Workout Plan
+                      </MDButton>
+                    </Link>
                   </MDBox>
+                </Card>
+              </MDBox>
 
-                  <MDBox
-                    mt={2}
-                    display="flex"
-                    justifyContent="space-between"
-                    width="100%"
-                  >
-                    <MDBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      width="100%"
-                      ml={15}
-                    >
-                      <MDTypography variant="h5">Weight</MDTypography>
-                      <MDTypography color="info" variant="body2">
-                        {selectedClient?.weight
-                          ? `${selectedClient.weight} lbs`
-                          : "N/A"}
-                      </MDTypography>
-                    </MDBox>
-                    <MDBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      width="100%"
-                    >
-                      <MDTypography variant="h5">Weight Goal</MDTypography>
-                      <MDTypography color="info" variant="body2">
-                        {selectedClient?.weightGoal
-                          ? `${selectedClient?.weightGoal} lbs`
-                          : "N/A"}
-                      </MDTypography>
-                    </MDBox>
-
-                    <MDBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      width="100%"
-                    >
-                      <MDTypography variant="h5">Fitness Level</MDTypography>
-                      <MDTypography color="info" variant="body2">
-                        {selectedClient?.fitnessLevel
-                          ? selectedClient.fitnessLevel
-                          : "N/A"}
-                      </MDTypography>
-                    </MDBox>
-                    <MDBox
-                      display="flex"
-                      flexDirection="column"
-                      justifyContent="flex-start"
-                      width="100%"
-                    >
-                      <MDTypography variant="h5">Fitness Goals</MDTypography>
-                      <MDTypography color="info" variant="body2">
-                        {selectedClient?.fitnessGoals
-                          ? selectedClient.fitnessGoals
-                          : "N/A"}
-                      </MDTypography>
-                    </MDBox>
-                  </MDBox>
-                </CardContent>
-              </Card>
               <MDBox mt={8} width="100%">
                 <MDTypography variant="h5" fontWeight="medium">
                   Weight History
                 </MDTypography>
-                <MDBox ml={1} mt={2}>
+                <MDBox mt={2}>
                   <LineChart
                     icon={{ color: "info", component: "fitness_center" }}
                     title="Current: 220 lbs"

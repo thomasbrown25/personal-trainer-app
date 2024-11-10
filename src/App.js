@@ -17,15 +17,8 @@ import theme from "assets/theme";
 import themeDark from "assets/theme-dark";
 import "./assets/global.css";
 
-// Components
-import Sidenav from "layouts/sidenav";
-
 // Material Dashboard 2 PRO React contexts
-import { useMaterialUIController, setMiniSidenav } from "context";
-
-// Images
-import brandWhite from "assets/images/favicon.png";
-import brandDark from "assets/images/favicon.png";
+import { useMaterialUIController } from "context";
 
 // Pages
 import LoginPage from "pages/login/login.page";
@@ -51,6 +44,7 @@ import ClientRoutes from "utils/private-routing/client-route";
 import ClientManagementPage from "pages/trainer/client-management/client-management.page";
 import AddNewClientPage from "pages/trainer/client-management/add-new-client.page";
 import WorkoutManagementPage from "pages/trainer/workout-management/workout-management.page";
+import EditWorkoutPlan from "pages/trainer/edit-workout-plan/edit-workout-plan.page";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -108,6 +102,10 @@ export default function App() {
           <Route
             path="/trainer/client-management"
             element={<ClientManagementPage />}
+          />
+          <Route
+            path="/trainer/client-management/edit-workout-plan/:clientId"
+            element={<EditWorkoutPlan />}
           />
           <Route
             path="/trainer/workout-management"
