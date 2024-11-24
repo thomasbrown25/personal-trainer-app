@@ -4,20 +4,37 @@ import Icon from "@mui/material/Icon";
 const trainerRoutes = [
   {
     type: "collapse",
-    name: "Dashboard",
-    key: "dashboard",
-    route: "/trainer/dashboard",
-    icon: <Icon fontSize="medium">dashboard</Icon>,
-    noCollapse: true
-  },
-  {
-    type: "collapse",
     name: "Clients",
     key: "clients",
     route: "/clients",
     icon: <Icon fontSize="medium">people</Icon>,
     noCollapse: true
   },
+  {
+    type: "collapse",
+    name: "Library",
+    key: "library",
+    route: "/library",
+    icon: <Icon fontSize="medium">collections</Icon>,
+    noCollapse: true
+  },
+  {
+    type: "collapse",
+    name: "Programs",
+    key: "programs",
+    route: "/programs",
+    icon: <Icon fontSize="medium">calendar_month</Icon>,
+    noCollapse: true
+  },
+  {
+    type: "collapse",
+    name: "Teams",
+    key: "teams",
+    route: "/teams",
+    icon: <Icon fontSize="medium">reduce_capacity</Icon>,
+    noCollapse: true
+  },
+
   { type: "divider", key: "divider-0" },
   { type: "title", title: "Docs", key: "title-docs" },
   {

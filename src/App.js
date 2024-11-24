@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 // react-router components
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 import store from "store/store";
 import { setAuthToken } from "utils/api.utils";
@@ -17,8 +17,9 @@ import theme from "assets/theme";
 import themeDark from "assets/theme-dark";
 import "./assets/global.css";
 
-// Material Dashboard 2 PRO React contexts
-import { useMaterialUIController } from "context";
+// Images
+import brandWhite from "assets/images/logo-ct.png";
+import brandDark from "assets/images/logo-ct-dark.png";
 
 // Pages
 import LoginPage from "pages/login/login.page";
@@ -45,11 +46,46 @@ import ClientManagementPage from "pages/trainer/client-management/client-managem
 import AddNewClientPage from "pages/trainer/client-management/add-new-client.page";
 import WorkoutManagementPage from "pages/trainer/workout-management/workout-management.page";
 import EditWorkoutPlan from "pages/trainer/edit-workout-plan/edit-workout-plan.page";
+import Sidenav from "layouts/sidenav";
+
+// Material Dashboard 2 PRO React contexts
+import {
+  useMaterialUIController,
+  setMiniSidenav,
+  setOpenConfigurator
+} from "context";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
-  const { miniSidenav, direction, layout, darkMode } = controller;
+  const {
+    miniSidenav,
+    direction,
+    layout,
+    openConfigurator,
+    sidenavColor,
+    transparentSidenav,
+    whiteSidenav,
+    darkMode
+  } = controller;
   const [onMouseEnter, setOnMouseEnter] = useState(false);
+  const [rtlCache, setRtlCache] = useState(null);
+  const { pathname } = useLocation();
+
+  // Open sidenav when mouse enter on mini sidenav
+  const handleOnMouseEnter = () => {
+    if (miniSidenav && !onMouseEnter) {
+      setMiniSidenav(dispatch, false);
+      setOnMouseEnter(true);
+    }
+  };
+
+  // Close sidenav when mouse leave mini sidenav
+  const handleOnMouseLeave = () => {
+    if (onMouseEnter) {
+      setMiniSidenav(dispatch, true);
+      setOnMouseEnter(false);
+    }
+  };
 
   useEffect(() => {
     // check for token in the local storage when app first runs
@@ -78,6 +114,20 @@ export default function App() {
   return (
     <ThemeProvider theme={darkMode ? themeDark : theme}>
       <CssBaseline />
+      {layout === "dashboard" && (
+        <Sidenav
+          color={sidenavColor}
+          brand={
+            (transparentSidenav && !darkMode) || whiteSidenav
+              ? brandDark
+              : brandWhite
+          }
+          brandName="TruTrainer"
+          onMouseEnter={handleOnMouseEnter}
+          onMouseLeave={handleOnMouseLeave}
+        />
+      )}
+
       <Routes>
         <Route path="login" element={<LoginPage />} />
         <Route path="sign-up" element={<RegisterPage />} />

@@ -39,6 +39,7 @@ import { selectCurrentUser } from "store/user/user.selector";
 
 import { logout } from "store/user/user.action";
 import MDTypography from "components/MDTypography";
+import Item from "./item";
 
 function DashboardNavbar({ absolute, light, isMini, logout }) {
   const user = useSelector(selectCurrentUser);
@@ -95,74 +96,107 @@ function DashboardNavbar({ absolute, light, isMini, logout }) {
   });
 
   return (
-    <AppBar
-      position={absolute ? "absolute" : navbarType}
-      color="inherit"
-      sx={{ background: "#000003" }}
-    >
-      <Toolbar sx={(theme) => navbarContainer(theme)}>
-        <MDBox
-          display="flex"
-          justifyContent="space-between"
-          color="inherit"
-          mb={{ xs: 1, md: 0 }}
-          sx={(theme) => navbarRow(theme, { isMini }, false)}
-        >
-          <MDBox display="flex">
-            <IconButton
-              sx={navbarDesktopMenu}
-              onClick={handleMiniSidenav}
-              size="small"
-              disableRipple
-            >
-              <Icon fontSize="medium" sx={iconsStyle}>
-                {miniSidenav ? "menu_open" : "menu"}
-              </Icon>
-            </IconButton>
-            <Link to="/">
-              <MDTypography
-                variant="h5"
-                textTransform="capitalize"
-                pl={1}
-                fontWeight="medium"
-                lineHeight={1.75}
-              >
-                {`${user.role} Dashboard`}
-              </MDTypography>
-            </Link>
-          </MDBox>
-          {isMini ? null : (
+    <>
+      <AppBar
+        position={absolute ? "absolute" : navbarType}
+        color="inherit"
+        sx={{ background: "#000003" }}
+      >
+        <Toolbar sx={(theme) => navbarContainer(theme)}>
+          <MDBox
+            display="flex"
+            justifyContent="space-between"
+            color="inherit"
+            mb={{ xs: 1, md: 0 }}
+            sx={(theme) => navbarRow(theme, { isMini }, false)}
+          >
             <MDBox display="flex">
-              <MDBox color={light ? "white" : "inherit"}>
-                <IconButton
-                  sx={navbarIconButton}
-                  onClick={handleProfileOpenMenu}
-                  size="small"
-                  disableRipple
+              <IconButton
+                sx={navbarDesktopMenu}
+                onClick={handleMiniSidenav}
+                size="small"
+                disableRipple
+              >
+                <Icon fontSize="medium" sx={iconsStyle}>
+                  {miniSidenav ? "menu_open" : "menu"}
+                </Icon>
+              </IconButton>
+              <Link to="/">
+                <MDTypography
+                  variant="h5"
+                  textTransform="capitalize"
+                  pl={1}
+                  fontWeight="medium"
+                  lineHeight={1.75}
                 >
-                  <Icon sx={iconsStyle}>account_circle</Icon>
-                  <MDTypography variant="h6" textTransform="capitalize" pl={1}>
-                    {`${user.firstname} ${user.lastname}`}
-                  </MDTypography>
-                </IconButton>
-                <IconButton
-                  size="small"
-                  disableRipple
-                  color="inherit"
-                  sx={navbarMobileMenu}
-                  onClick={handleMiniSidenav}
-                >
-                  <Icon sx={iconsStyle} fontSize="medium">
-                    {miniSidenav ? "menu_open" : "menu"}
-                  </Icon>
-                </IconButton>
-                {profileMenu()}
-              </MDBox>
+                  {`${user.role} Dashboard`}
+                </MDTypography>
+              </Link>
             </MDBox>
-          )}
-        </MDBox>
-      </Toolbar>
-    </AppBar>
+            {isMini ? null : (
+              <MDBox display="flex">
+                <MDBox color={light ? "white" : "inherit"}>
+                  <IconButton
+                    sx={navbarIconButton}
+                    onClick={handleProfileOpenMenu}
+                    size="small"
+                    disableRipple
+                  >
+                    <Icon sx={iconsStyle}>account_circle</Icon>
+                    <MDTypography
+                      variant="h6"
+                      textTransform="capitalize"
+                      pl={1}
+                    >
+                      {`${user.firstname} ${user.lastname}`}
+                    </MDTypography>
+                  </IconButton>
+                  <IconButton
+                    size="small"
+                    disableRipple
+                    color="inherit"
+                    sx={navbarMobileMenu}
+                    onClick={handleMiniSidenav}
+                  >
+                    <Icon sx={iconsStyle} fontSize="medium">
+                      {miniSidenav ? "menu_open" : "menu"}
+                    </Icon>
+                  </IconButton>
+                  {profileMenu()}
+                </MDBox>
+              </MDBox>
+            )}
+          </MDBox>
+        </Toolbar>
+      </AppBar>
+      <AppBar
+        position={absolute ? "absolute" : navbarType}
+        color="inherit"
+        sx={{ background: "#0d1117", borderBottom: "1px solid #3d444d" }}
+      >
+        <Toolbar
+          sx={
+            ((theme) => navbarContainer(theme), { minHeight: "45px!important" })
+          }
+        >
+          <MDBox
+            display="flex"
+            justifyContent="space-between"
+            color="inherit"
+            px={50}
+            mb={{ xs: 1, md: 0 }}
+            width="100%"
+            height="0px"
+            sx={(theme) => navbarRow(theme, { isMini }, false)}
+          >
+            <Item text="Clients" to="/" />
+            <Item text="Library" to="/" />
+            <Item text="Programs" to="/" />
+            <Item text="Teams" to="/" />
+          </MDBox>
+        </Toolbar>
+      </AppBar>
+    </>
   );
 }
 

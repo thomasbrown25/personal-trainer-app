@@ -19,6 +19,14 @@ const sidenavRoutes = [
   },
   {
     type: "collapse",
+    name: "Library",
+    key: "library",
+    route: "/library",
+    icon: <Icon fontSize="medium">people</Icon>,
+    noCollapse: true
+  },
+  {
+    type: "collapse",
     name: "Clients",
     key: "clients",
     route: "/clients",
