@@ -97,7 +97,7 @@ export const trainerPrograms = [
     name: "Basic",
     description: "This is a basic workout plan",
     active: "8",
-    days: "21"
+    days: "14"
   },
   {
     name: "Intermediate",
@@ -109,13 +109,13 @@ export const trainerPrograms = [
     name: "Advanced",
     description: "This is an advanced workout plan",
     active: "2",
-    days: "21"
+    days: "28"
   },
   {
     name: "Athlete",
     description: "This is an athlete workout plan",
     active: "5",
-    days: "21"
+    days: "28"
   },
   {
     name: "Custom",

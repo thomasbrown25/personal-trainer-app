@@ -11,7 +11,9 @@ const ProgamTable = ({ programs }) => {
         display: "flex",
         flexDirection: "column",
         marginTop: "2rem",
-        width: "100%"
+        width: "100%",
+        border: `1px solid ${background.border}`,
+        borderRadius: "10px"
       }}
     >
       {/* Table header */}
@@ -20,8 +22,7 @@ const ProgamTable = ({ programs }) => {
         p={2}
         sx={{
           background: background.grey,
-          border: `1px solid ${background.border}`,
-          borderRadius: "5px"
+          borderBottom: `1px solid ${background.border}`
         }}
       >
         <MDBox flex={1}>
@@ -43,10 +44,27 @@ const ProgamTable = ({ programs }) => {
 
       {/* Table rows */}
       {programs.map((row, index) => (
-        <MDBox key={index} display="flex">
+        <MDBox
+          key={index}
+          display="flex"
+          alignItems="center"
+          px={2}
+          py={3}
+          sx={{
+            borderBottom:
+              index === programs.length - 1
+                ? ""
+                : `1px solid ${background.border}`,
+            background: background.dark,
+            "&:hover": {
+              background: background.grey,
+              cursor: "pointer"
+            }
+          }}
+        >
           <MDBox flex={1}>
             <MDBox>
-              <MDTypography variant="h6" fontWeight="bold">
+              <MDTypography variant="h6" fontWeight="bold" color="info">
                 {row.name}
               </MDTypography>
               <MDTypography variant="h6">{row.description}</MDTypography>
@@ -60,7 +78,7 @@ const ProgamTable = ({ programs }) => {
               <MDTypography
                 variant="h6"
                 position="absolute"
-                sx={{ top: 11, left: 10 }}
+                sx={{ top: 10.5, left: 9 }}
               >
                 {row.days}
               </MDTypography>
