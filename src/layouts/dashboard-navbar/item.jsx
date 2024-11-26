@@ -2,9 +2,9 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import { Link } from "react-router-dom";
 
-const Item = ({ text, to }) => {
+const Item = ({ text, to, end }) => {
   return (
-    <MDBox display="flex">
+    <MDBox display="flex" pr={end ? 0 : 10}>
       <Link to={to}>
         <MDTypography
           variant="h6"

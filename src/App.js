@@ -32,6 +32,7 @@ import AdminProfilePage from "pages/admin/profile/profile.page";
 // Trainer Pages
 import TrainerDashboardPage from "pages/trainer/dashboard/dashboard.page";
 import TrainerProfilePage from "pages/trainer/profile/profile.page";
+import TrainerClientProfilePage from "pages/trainer/client-profile/client-profile.page";
 
 // Client Pages
 import ClientDashboardPage from "pages/client/dashboard/dashboard.page";
@@ -54,6 +55,7 @@ import {
   setMiniSidenav,
   setOpenConfigurator
 } from "context";
+import ProgramsPage from "pages/trainer/programs/programs.page";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -132,6 +134,7 @@ export default function App() {
         <Route path="login" element={<LoginPage />} />
         <Route path="sign-up" element={<RegisterPage />} />
 
+        {/* ADMIN ROUTES */}
         <Route element={<AdminRoutes />}>
           <Route
             index
@@ -142,6 +145,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/admin/dashboard" />} />
         </Route>
 
+        {/* TRAINER ROUTES */}
         <Route element={<TrainerRoutes />}>
           <Route
             index
@@ -158,9 +162,11 @@ export default function App() {
             element={<EditWorkoutPlan />}
           />
           <Route
-            path="/trainer/workout-management"
-            element={<WorkoutManagementPage />}
+            path="/trainer/client-profile/:clientId"
+            element={<TrainerClientProfilePage />}
           />
+          <Route path="/trainer/programs" element={<ProgramsPage />} />
+          <Route path="/trainer/library" element={<WorkoutManagementPage />} />
           <Route
             path="/trainer/add-new-client"
             element={<AddNewClientPage />}
@@ -168,6 +174,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/trainer/dashboard" />} />
         </Route>
 
+        {/* CLIENT ROUTES */}
         <Route element={<ClientRoutes />}>
           <Route
             index

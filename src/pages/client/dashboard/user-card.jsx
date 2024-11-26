@@ -19,11 +19,11 @@ const UserCard = ({ user, userTrainer }) => {
         mt={2}
         px={10}
       >
-        <UserDetail title="Height" detail={user.height} />
-        <UserDetail title="Weight" detail={user.weight} />
-        <UserDetail title="Weight Goal" detail={user.weightGoal} />
-        <UserDetail title="Fitness Goal" detail={user.fitnessGoals} />
-        <UserDetail title="Fitness Level" detail={user.fitnessLevel} />
+        <UserDetail title="Height" detail={user?.height} />
+        <UserDetail title="Weight" detail={user?.weight} />
+        <UserDetail title="Weight Goal" detail={user?.weightGoal} />
+        <UserDetail title="Fitness Goal" detail={user?.fitnessGoals} />
+        <UserDetail title="Fitness Level" detail={user?.fitnessLevel} />
 
         <MDBox display="flex" mt={2}>
           <MDTypography variant="h6" mr={1}>

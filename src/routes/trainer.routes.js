@@ -6,7 +6,7 @@ const trainerRoutes = [
     type: "collapse",
     name: "Clients",
     key: "clients",
-    route: "/clients",
+    route: "/trainer/client-management",
     icon: <Icon fontSize="medium">people</Icon>,
     noCollapse: true
   },
@@ -14,7 +14,7 @@ const trainerRoutes = [
     type: "collapse",
     name: "Library",
     key: "library",
-    route: "/library",
+    route: "/trainer/library",
     icon: <Icon fontSize="medium">collections</Icon>,
     noCollapse: true
   },
@@ -22,7 +22,7 @@ const trainerRoutes = [
     type: "collapse",
     name: "Programs",
     key: "programs",
-    route: "/programs",
+    route: "/trainer/programs",
     icon: <Icon fontSize="medium">calendar_month</Icon>,
     noCollapse: true
   },
@@ -30,7 +30,7 @@ const trainerRoutes = [
     type: "collapse",
     name: "Teams",
     key: "teams",
-    route: "/teams",
+    route: "/trainer/teams",
     icon: <Icon fontSize="medium">reduce_capacity</Icon>,
     noCollapse: true
   },

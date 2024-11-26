@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { connect, useSelector } from "react-redux";
 
 // react-router components
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -16,14 +16,12 @@ import Icon from "@mui/material/Icon";
 
 // Custom components
 import MDBox from "components/MDBox";
-import MDInput from "components/MDInput";
 
 // Material Dashboard 2 PRO React examples
 import NotificationItem from "components/NotificationItem";
 
 // Custom styles for DashboardNavbar
 import {
-  navbar,
   navbarContainer,
   navbarRow,
   navbarIconButton,
@@ -41,9 +39,13 @@ import { logout } from "store/user/user.action";
 import MDTypography from "components/MDTypography";
 import Item from "./item";
 
+import colors from "assets/theme-dark/base/colors";
+
+const { background } = colors;
+
 function DashboardNavbar({ absolute, light, isMini, logout }) {
   const user = useSelector(selectCurrentUser);
-  const [navbarType, setNavbarType] = useState("static");
+  const [navbarType] = useState("static");
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentNavbar, darkMode } = controller;
   const [openProfileMenu, setOpenProfileMenu] = useState(false);
@@ -100,7 +102,11 @@ function DashboardNavbar({ absolute, light, isMini, logout }) {
       <AppBar
         position={absolute ? "absolute" : navbarType}
         color="inherit"
-        sx={{ background: "#000003" }}
+        sx={{
+          background: background.dark,
+          paddingX: "2rem",
+          borderBottom: `1px solid ${background.border}`
+        }}
       >
         <Toolbar sx={(theme) => navbarContainer(theme)}>
           <MDBox
@@ -172,7 +178,10 @@ function DashboardNavbar({ absolute, light, isMini, logout }) {
       <AppBar
         position={absolute ? "absolute" : navbarType}
         color="inherit"
-        sx={{ background: "#0d1117", borderBottom: "1px solid #3d444d" }}
+        sx={{
+          background: "#0d1117",
+          borderBottom: `1px solid ${background.border}`
+        }}
       >
         <Toolbar
           sx={
@@ -181,17 +190,17 @@ function DashboardNavbar({ absolute, light, isMini, logout }) {
         >
           <MDBox
             display="flex"
-            justifyContent="space-between"
+            justifyContent="flex-start"
             color="inherit"
-            px={50}
+            pl={54}
             mb={{ xs: 1, md: 0 }}
             width="100%"
-            height="0px"
-            sx={(theme) => navbarRow(theme, { isMini }, false)}
+            //sx={(theme) => navbarRow(theme, { isMini }, false)}
           >
-            <Item text="Clients" to="/" />
-            <Item text="Library" to="/" />
-            <Item text="Programs" to="/" />
+            <Item text="Overview" to="/trainer/dashboard" />
+            <Item text="Clients" to="/trainer/client-management" />
+            <Item text="Library" to="/trainer/library" />
+            <Item text="Programs" to="/trainer/prgorams" />
             <Item text="Teams" to="/" />
           </MDBox>
         </Toolbar>

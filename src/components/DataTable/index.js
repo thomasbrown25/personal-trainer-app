@@ -237,7 +237,9 @@ function DataTable({
                       align={cell.column.align ? cell.column.align : "left"}
                       selectable={cell.column.Header === "name" ? true : false}
                       {...cell.getCellProps()}
-                      handleOnClick={() => handleClientClick(cell.row.id)}
+                      handleOnClick={() =>
+                        handleClientClick(row.original.clientId)
+                      }
                     >
                       {cell.render("Cell")}
                     </DataTableBodyCell>
