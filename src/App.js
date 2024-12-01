@@ -56,6 +56,7 @@ import {
   setOpenConfigurator
 } from "context";
 import ProgramsPage from "pages/trainer/programs/programs.page";
+import ProgramPage from "pages/trainer/program/program.page";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -166,6 +167,10 @@ export default function App() {
             element={<TrainerClientProfilePage />}
           />
           <Route path="/trainer/programs" element={<ProgramsPage />} />
+          <Route
+            path="/trainer/programs/:programId"
+            element={<ProgramPage />}
+          />
           <Route path="/trainer/library" element={<WorkoutManagementPage />} />
           <Route
             path="/trainer/add-new-client"

@@ -1,8 +1,11 @@
 import { TRAINER_ACTION_TYPES } from "./trainer.types";
 
+import { trainerPrograms } from "data";
+
 const initialState = {
   clients: [],
   clientsLastVisited: [],
+  programs: trainerPrograms,
   loading: true,
   error: null
 };

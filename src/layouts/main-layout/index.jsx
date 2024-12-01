@@ -15,7 +15,7 @@ import Footer from "layouts/footer";
 import { max } from "moment";
 import SubNavbar from "layouts/sub-navbar";
 
-const MainLayout = ({ children, pageTitle }) => {
+const MainLayout = ({ children, pageTitle, expand }) => {
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav } = controller;
   const { pathname } = useLocation();
@@ -34,7 +34,7 @@ const MainLayout = ({ children, pageTitle }) => {
             p: 3,
             position: "relative",
             minHeight: "97vh",
-            maxWidth: "1280px",
+            maxWidth: expand ? "100%" : "1350px",
             width: "100%",
 
             [breakpoints.up("xl")]: {

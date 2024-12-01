@@ -8,7 +8,7 @@ import MDTypography from "components/MDTypography";
 import MainLayout from "layouts/main-layout";
 import MDInput from "components/MDInput";
 
-import ProgamTable from "./progam-table";
+import ProgamsTable from "./progams-table";
 
 // data
 import { trainerPrograms } from "data";
@@ -43,7 +43,7 @@ const ProgramsPage = () => {
       </MDBox>
 
       <MDBox>
-        <ProgamTable programs={filteredItems} />
+        <ProgamsTable programs={filteredItems} />
       </MDBox>
     </MainLayout>
   );

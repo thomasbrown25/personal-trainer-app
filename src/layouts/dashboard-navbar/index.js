@@ -200,7 +200,7 @@ function DashboardNavbar({ absolute, light, isMini, logout }) {
             <Item text="Overview" to="/trainer/dashboard" />
             <Item text="Clients" to="/trainer/client-management" />
             <Item text="Library" to="/trainer/library" />
-            <Item text="Programs" to="/trainer/prgorams" />
+            <Item text="Programs" to="/trainer/programs" />
             <Item text="Teams" to="/" />
           </MDBox>
         </Toolbar>

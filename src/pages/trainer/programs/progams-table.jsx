@@ -1,10 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import MDTypography from "components/MDTypography";
 import MDBox from "components/MDBox";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import colors from "assets/theme-dark/base/colors";
 const { background } = colors;
 
-const ProgamTable = ({ programs }) => {
+const ProgamsTable = ({ programs }) => {
+  const navigate = useNavigate();
+  const handleSelect = (id) => {
+    navigate(`/trainer/programs/${id}`);
+  };
   return (
     <MDBox
       sx={{
@@ -50,6 +55,7 @@ const ProgamTable = ({ programs }) => {
           alignItems="center"
           px={2}
           py={3}
+          onClick={() => handleSelect(row.id)}
           sx={{
             borderBottom:
               index === programs.length - 1
@@ -63,7 +69,7 @@ const ProgamTable = ({ programs }) => {
           }}
         >
           <MDBox flex={1}>
-            <MDBox>
+            <MDBox pr={5}>
               <MDTypography variant="h6" fontWeight="bold" color="info">
                 {row.name}
               </MDTypography>
@@ -78,7 +84,11 @@ const ProgamTable = ({ programs }) => {
               <MDTypography
                 variant="h6"
                 position="absolute"
-                sx={{ top: 10.5, left: 9 }}
+                sx={
+                  isSingleDigit(row.days)
+                    ? { top: 10.5, left: 13 }
+                    : { top: 10.5, left: 9 }
+                }
               >
                 {row.days}
               </MDTypography>
@@ -91,4 +101,8 @@ const ProgamTable = ({ programs }) => {
   );
 };
 
-export default ProgamTable;
+function isSingleDigit(number) {
+  return number >= 0 && number <= 9;
+}
+
+export default ProgamsTable;
