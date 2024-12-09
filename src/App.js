@@ -33,6 +33,9 @@ import AdminProfilePage from "pages/admin/profile/profile.page";
 import TrainerDashboardPage from "pages/trainer/dashboard/dashboard.page";
 import TrainerProfilePage from "pages/trainer/profile/profile.page";
 import TrainerClientProfilePage from "pages/trainer/client-profile/client-profile.page";
+import ProgramsPage from "pages/trainer/programs/programs.page";
+import ProgramPage from "pages/trainer/program/program.page";
+import EditProgram from "pages/trainer/edit-program/edit-program.page";
 
 // Client Pages
 import ClientDashboardPage from "pages/client/dashboard/dashboard.page";
@@ -46,7 +49,6 @@ import ClientRoutes from "utils/private-routing/client-route";
 import ClientManagementPage from "pages/trainer/client-management/client-management.page";
 import AddNewClientPage from "pages/trainer/client-management/add-new-client.page";
 import WorkoutManagementPage from "pages/trainer/workout-management/workout-management.page";
-import EditWorkoutPlan from "pages/trainer/edit-workout-plan/edit-workout-plan.page";
 import Sidenav from "layouts/sidenav";
 
 // Material Dashboard 2 PRO React contexts
@@ -55,8 +57,6 @@ import {
   setMiniSidenav,
   setOpenConfigurator
 } from "context";
-import ProgramsPage from "pages/trainer/programs/programs.page";
-import ProgramPage from "pages/trainer/program/program.page";
 
 export default function App() {
   const [controller, dispatch] = useMaterialUIController();
@@ -159,10 +159,6 @@ export default function App() {
             element={<ClientManagementPage />}
           />
           <Route
-            path="/trainer/client-management/edit-workout-plan/:clientId"
-            element={<EditWorkoutPlan />}
-          />
-          <Route
             path="/trainer/client-profile/:clientId"
             element={<TrainerClientProfilePage />}
           />
@@ -170,6 +166,10 @@ export default function App() {
           <Route
             path="/trainer/programs/:programId"
             element={<ProgramPage />}
+          />
+          <Route
+            path="/trainer/programs/edit/:programId"
+            element={<EditProgram />}
           />
           <Route path="/trainer/library" element={<WorkoutManagementPage />} />
           <Route

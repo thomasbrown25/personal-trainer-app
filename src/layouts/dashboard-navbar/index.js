@@ -179,7 +179,7 @@ function DashboardNavbar({ absolute, light, isMini, logout }) {
         position={absolute ? "absolute" : navbarType}
         color="inherit"
         sx={{
-          background: "#0d1117",
+          background: background.dark,
           borderBottom: `1px solid ${background.border}`
         }}
       >

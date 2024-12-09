@@ -11,9 +11,9 @@ import MDButton from "components/MDButton";
 import { Divider, Icon } from "@mui/material";
 import ProgramTableHead from "./program-table-head";
 import ProgramWorkout from "./program-workout";
+import ProgramTable from "./program-table";
 
 import colors from "assets/theme-dark/base/colors";
-import ProgramTable from "./program-table";
 
 const { background } = colors;
 

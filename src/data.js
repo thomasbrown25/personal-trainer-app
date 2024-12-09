@@ -566,18 +566,6 @@ export const trainerPrograms = [
             reps: "Light jogging, cycling, swimming, or a leisurely walk (30 min)"
           }
         ]
-      },
-      {
-        day: "Day 15",
-        type: "At-Home Workout",
-        focus: "Active Recovery or Light Cardio",
-        exercises: [
-          {
-            name: "Activity Options",
-            sets: "",
-            reps: "Light jogging, cycling, swimming, or a leisurely walk (30 min)"
-          }
-        ]
       }
     ]
   },

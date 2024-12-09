@@ -1,6 +1,5 @@
 import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
-import ProgramTableHead from "./program-table-head";
 import ProgramWorkout from "./program-workout";
 
 import colors from "assets/theme-dark/base/colors";
@@ -16,7 +15,7 @@ const ProgramTable = ({ program }) => {
     let data = [];
     for (let i = 0; i <= plans.length; i++) {
       if (plans.length > i) {
-        i += 7;
+        i += 6;
 
         data.push(
           <>
